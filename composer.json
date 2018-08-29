@@ -1,0 +1,40 @@
+{
+    "name": "GreenTea/flux",
+    "type": "library",
+    "homepage": "https://github.com/2dsharp/flux",
+    "license": "GPL-V2",
+    "description": "Validation components for commonly used data with value objects. Part of the GreenTea library.",
+    "keywords": ["validation", "forms", "data", "value objects"],
+
+    "authors": [
+        {
+        "name": "Dedipyaman Das",
+        "email": "2d@twodee.me",
+        "role": "Developer"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": { "GreenTea\\Flux\\": "src/" }
+    },
+
+    "require": {
+        "php": ">=7.0",
+        "ext-pdo": "*",
+        "psr/log": "1.*"
+    },
+    "require-dev": {
+        "php": ">=7.0",
+        "ext-pdo_sqlite": "*",
+        "phpunit/phpunit": "^6.5"
+    },
+
+    "config": {
+        "platform": {
+            "php": "7.0"
+        },
+        "platform-dev": {
+            "php": "7.0"
+        }
+    }
+}
