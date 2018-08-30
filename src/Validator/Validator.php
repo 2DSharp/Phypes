@@ -1,6 +1,6 @@
 <?php
 
-namespace GreenTea\Flux;
+namespace GreenTea\Flux\Validator;
 
 use GreenTea\Flux\Type\Type;
 
