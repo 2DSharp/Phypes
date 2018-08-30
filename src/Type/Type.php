@@ -1,15 +1,11 @@
 <?php
 
-namespace GreenTea\Flux\Type;
+namespace GreenTea\Phypes\Type;
 
-use GreenTea\Flux\Validator\Validator;
+use GreenTea\Phypes\Validator\Validator;
 
 interface Type
 {
     public function __toString() : string;
     public function getValue();
 }
-
-
-
-

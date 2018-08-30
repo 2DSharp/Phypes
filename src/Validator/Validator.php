@@ -1,8 +1,8 @@
 <?php
 
-namespace GreenTea\Flux\Validator;
+namespace GreenTea\Phypes\Validator;
 
-use GreenTea\Flux\Type\Type;
+use GreenTea\Phypes\Type\Type;
 
 interface Validator
 {

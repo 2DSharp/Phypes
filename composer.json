@@ -15,7 +15,7 @@
     ],
 
     "autoload": {
-        "psr-4": { "GreenTea\\Flux\\": "src/" }
+        "psr-4": { "GreenTea\\Phypes\\": "src/" }
     },
 
     "require": {
