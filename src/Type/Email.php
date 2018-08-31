@@ -6,7 +6,7 @@
  * Time: 1:17 AM
  */
 
-namespace GreenTea\Flux\Type;
+namespace GreenTea\Phypes\Type;
 
 use GreenTea\Phypes\Type\Type;
 use GreenTea\Phypes\Validator\Validator;
@@ -34,7 +34,7 @@ class Email implements Type
         // TODO: Implement __toString() method.
     }
 
-    public function getValue()
+    public function getValue() : string
     {
         // TODO: Implement getValue() method.
     }

@@ -6,9 +6,11 @@
  * Time: 1:26 AM
  */
 
-namespace GreenTea\Flux\Type;
+namespace GreenTea\Phypes\Type;
 
-final class EmailTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class EmailTest extends TestCase
 {
 
     public function test__construct()
@@ -18,7 +20,6 @@ final class EmailTest extends \PHPUnit_Framework_TestCase
 
     public function test__toString()
     {
-
     }
 
     public function testGetValue()
