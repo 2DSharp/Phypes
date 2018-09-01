@@ -36,6 +36,6 @@ class Email implements Type
 
     public function getValue() : string
     {
-        // TODO: Implement getValue() method.
+        return $this->email;
     }
 }

@@ -6,5 +6,5 @@ use GreenTea\Phypes\Type\Type;
 
 interface Validator
 {
-    public function validate($type, $options = []);
+    public function validate($type, $options = []) : bool;
 }
