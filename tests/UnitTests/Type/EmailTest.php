@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: dedipyaman
@@ -25,15 +26,15 @@ final class EmailTest extends TestCase
 
     public function testGetValue()
     {
-        $validator = $this->getValidatorMock("email@example.com");
+        $validator = $this->getValidatorMock();
         $email = new Email("email@example.com", $validator);
         $this->assertEquals('email@example.com', $email->getValue());
     }
 
-    private function getValidatorMock(string $email) : Validator
+    private function getValidatorMock() : Validator
     {
         $validator = Mockery::mock(Validator::class);
-        $validator->allows()->validate($email)->andReturns(true);
+        $validator->allows()->validate("email@example.com")->andReturns(true);
         return $validator;
     }
 }
