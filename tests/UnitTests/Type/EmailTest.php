@@ -26,15 +26,10 @@ final class EmailTest extends TestCase
 
     public function testGetValue()
     {
-        $validator = $this->getValidatorMock();
+        $validator = Mockery::mock(Validator::class);
+        $validator->allows()->isValid("email@example.com")->andReturns(true);
+
         $email = new Email("email@example.com", $validator);
         $this->assertEquals('email@example.com', $email->getValue());
-    }
-
-    private function getValidatorMock() : Validator
-    {
-        $validator = Mockery::mock(Validator::class);
-        $validator->allows()->validate("email@example.com")->andReturns(true);
-        return $validator;
     }
 }
