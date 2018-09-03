@@ -25,7 +25,9 @@ class Email implements Type
      */
     public function __construct(string $email, Validator $validator)
     {
-        $validator->validate($email);
+        if (!$validator->isValid($email)) {
+            throw new \InvalidArgumentException("The provided email address in invalid.");
+        }
         $this->email = $email;
     }
 
