@@ -35,7 +35,7 @@ final class EmailTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * Should throw an InvalidArgumentException on failure to validate.
      */
     public function testExceptionOnFailure()
     {
@@ -44,8 +44,9 @@ final class EmailTest extends TestCase
         $validator = Mockery::mock(Validator::class);
         $validator->allows()->isValid($failingValue)->andReturns(false);
 
-        $email = new Email($failingValue, $validator);
         $this->expectException(\InvalidArgumentException::class);
+
+        $email = new Email($failingValue, $validator);
     }
 
     /**
