@@ -24,12 +24,18 @@ class EmailValidatorTest extends TestCase
         $this->assertInstanceOf(Validator::class, $this->validator);
     }
 
+    /**
+     * Test passing condition on a valid email
+     */
     public function testIsValidPass()
     {
         $result = $this->validator->isValid('2d@twodee.me');
         $this->assertTrue($result);
     }
 
+    /**
+     * Should fail and return false
+     */
     public function testIsValidFailure()
     {
         $result = $this->validator->isValid('12345lol@');
