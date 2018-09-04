@@ -11,9 +11,8 @@ namespace GreenTea\Phypes\Validator;
 
 class EmailValidator implements Validator
 {
-
-    public function isValid($type, $options = []): bool
+    public function isValid($email, $options = []): bool
     {
-        return filter_var($type, FILTER_VALIDATE_EMAIL);
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 }
