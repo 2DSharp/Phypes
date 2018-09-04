@@ -19,12 +19,12 @@
     },
 
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.2",
         "ext-pdo": "*",
         "psr/log": "1.*"
     },
     "require-dev": {
-        "php": ">=7.0",
+        "php": ">=7.2",
         "ext-pdo_sqlite": "*",
         "phpunit/phpunit": "^7",
         "mockery/mockery": "^1.1"
