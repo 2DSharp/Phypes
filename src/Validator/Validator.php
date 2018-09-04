@@ -4,5 +4,5 @@ namespace GreenTea\Phypes\Validator;
 
 interface Validator
 {
-    public function validate($type, $options = []) : bool;
+    public function isValid($type, $options = []) : bool;
 }
