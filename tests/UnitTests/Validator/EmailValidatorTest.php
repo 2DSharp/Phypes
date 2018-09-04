@@ -12,20 +12,27 @@ use PHPUnit\Framework\TestCase;
 
 class EmailValidatorTest extends TestCase
 {
+    private $validator;
+
+    public function setUp()
+    {
+        $this->validator = new EmailValidator();
+    }
 
     public function testImplementsInterface()
     {
-        $this->assertInstanceOf(Validator::class, new EmailValidator());
+        $this->assertInstanceOf(Validator::class, $this->validator);
     }
 
-    public function testIsValid()
+    public function testIsValidPass()
     {
-        $validator = new EmailValidator();
-        
-        $result = $validator->isValid('2d@twodee.me');
+        $result = $this->validator->isValid('2d@twodee.me');
         $this->assertTrue($result);
+    }
 
-        $result = $validator->isValid('12345lol@');
+    public function testIsValidFailure()
+    {
+        $result = $this->validator->isValid('12345lol@');
         $this->assertFalse($result);
     }
 }

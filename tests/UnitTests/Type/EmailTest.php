@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace GreenTea\Phypes\Type;
 
+use GreenTea\Phypes\Validator\EmailValidator;
 use GreenTea\Phypes\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 use Mockery;
@@ -22,21 +23,35 @@ final class EmailTest extends TestCase
 
     public function testImplementsTypeInterface()
     {
-        $this->assertInstanceOf(Type::class, $this->getValidEmail());
+        $this->assertInstanceOf(Type::class, $this->getValidEmail('email@example.com'));
     }
 
     public function testGetValue()
     {
-        $email = $this->getValidEmail();
+        $email = $this->getValidEmail('email@example.com');
         $this->assertEquals('email@example.com', $email->getValue());
     }
 
-    private function getValidEmail() : Email
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testExceptionOnFailure()
+    {
+        $failingValue = "john@12.";
+
+        $validator = Mockery::mock(Validator::class);
+        $validator->allows()->isValid($failingValue)->andReturns(false);
+
+        $email = new Email($failingValue, $validator);
+        $this->expectException(\InvalidArgumentException::class);
+    }
+
+    private function getValidEmail(string $validEmail) : Email
     {
         $validator = Mockery::mock(Validator::class);
-        $validator->allows()->isValid("email@example.com")->andReturns(true);
+        $validator->allows()->isValid($validEmail)->andReturns(true);
 
-        $email = new Email("email@example.com", $validator);
+        $email = new Email($validEmail, $validator);
         return $email;
     }
 }
