@@ -1,7 +1,7 @@
 {
-    "name": "GreenTea/flux",
+    "name": "GreenTea/Phypes",
     "type": "library",
-    "homepage": "https://github.com/2dsharp/flux",
+    "homepage": "https://github.com/2dsharp/Phypes",
     "license": "GPL-V2",
     "description": "Validation components for commonly used data with value objects. Part of the GreenTea library.",
     "keywords": ["validation", "forms", "data", "value objects"],
