@@ -1,8 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace GreenTea\Phypes\Type;
-
-use GreenTea\Phypes\Validator\Validator;
 
 interface Type
 {

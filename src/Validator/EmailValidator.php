@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Created by PhpStorm.
  * User: dedipyaman
@@ -13,6 +15,9 @@ class EmailValidator implements Validator
 {
     public function isValid($email, $options = []): bool
     {
-        return filter_var($email, FILTER_VALIDATE_EMAIL);
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        }
+        return false;
     }
 }

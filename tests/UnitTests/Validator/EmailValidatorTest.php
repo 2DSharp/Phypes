@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Created by PhpStorm.
  * User: dedipyaman
@@ -19,7 +21,7 @@ class EmailValidatorTest extends TestCase
         $this->validator = new EmailValidator();
     }
 
-    public function testImplementsInterface()
+    public function testImplementsInterface() : void
     {
         $this->assertInstanceOf(Validator::class, $this->validator);
     }
@@ -27,7 +29,7 @@ class EmailValidatorTest extends TestCase
     /**
      * Test passing condition on a valid email
      */
-    public function testIsValidPass()
+    public function testIsValidPass() : void
     {
         $result = $this->validator->isValid('2d@twodee.me');
         $this->assertTrue($result);
@@ -36,7 +38,7 @@ class EmailValidatorTest extends TestCase
     /**
      * Should fail and return false
      */
-    public function testIsValidFailure()
+    public function testIsValidFailure() : void
     {
         $result = $this->validator->isValid('12345lol@');
         $this->assertFalse($result);
