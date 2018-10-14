@@ -19,23 +19,23 @@
     },
 
     "require": {
-        "php": ">=7.2",
+        "php": ">=5.6",
         "ext-pdo": "*",
         "psr/log": "1.*"
     },
     "require-dev": {
-        "php": ">=7.2",
+        "php": ">=5.6",
         "ext-pdo_sqlite": "*",
-        "phpunit/phpunit": "^7",
+        "phpunit/phpunit": "^5",
         "mockery/mockery": "^1.1"
     },
 
     "config": {
         "platform": {
-            "php": "7.2.9"
+            "php": "5.6"
         },
         "platform-dev": {
-            "php": "7.2.9"
+            "php": "5.6"
         }
     }
 }

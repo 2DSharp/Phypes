@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: dedipyaman
@@ -10,50 +9,20 @@ declare(strict_types=1);
 namespace GreenTea\Phypes\Type;
 
 use GreenTea\Phypes\Type\Type;
-use GreenTea\Phypes\Validator\EmailValidator;
-use GreenTea\Phypes\Validator\Validator;
 
-class Email implements Type
+class Email extends Type
 {
     /**
-     * @var string $email
+     * Validates the email value and returns the outcome.
+     *
+     * @return boolean
      */
-    private $email;
-
-    /**
-     * Create an email object if data is valid.
-     * @param string $email
-     * @param Validator $validator
-     * @throws \InvalidArgumentException
-     */
-    public function __construct(string $email, Validator $validator = null)
+    public function isValid()
     {
-        if ($validator == null) {
-            // use the default validator
-            $validator = new EmailValidator();
+        if (!filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
+            $this->error = sprintf("The provided email address (%s) was not valid.", $this->value);
+            return false;
         }
-
-        if (!$validator->isValid($email)) {
-            throw new \InvalidArgumentException("The provided email address in invalid.");
-        }
-        $this->email = $email;
-    }
-
-    /**
-     * Get string representation of the email object.
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * Get real value of the email object.
-     * @return string
-     */
-    public function getValue() : string
-    {
-        return $this->email;
+        return true;
     }
 }
