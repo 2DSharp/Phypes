@@ -34,7 +34,7 @@ class Email implements Type
         }
 
         if (!$validator->isValid($email)) {
-            throw new \InvalidArgumentException("The provided email address in invalid.");
+            throw new \InvalidArgumentException('The provided email address in invalid.');
         }
         $this->email = $email;
     }
