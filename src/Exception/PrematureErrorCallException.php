@@ -9,12 +9,15 @@
 namespace GreenTea\Phypes\Exception;
 
 
+use GreenTea\Phypes\Validator\Error;
+
 class PrematureErrorCallException extends \Exception
 {
     public function __construct()
     {
         // Do not allow error messages to be displayed before validating
-        parent::__construct("Attempting to get error message before validation.", 23000);
+        parent::__construct("Attempting to get error message before validation.",
+            Error::PREMATURE_CALL_TO_METHOD);
     }
 
     // custom string representation of object

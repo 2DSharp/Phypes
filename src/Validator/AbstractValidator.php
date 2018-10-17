@@ -13,11 +13,15 @@ abstract class AbstractValidator implements Validator
      */
     protected $validated = false;
     /**
-     * @var string|null $error
      * Stores the error message on validation failure
+     * @var string|null $error
      */
     protected $error;
-
+    /**
+     * Error code to allow for search with int rather than string
+     * @var integer $errorCode
+     */
+    protected $errorCode;
     /**
      * Return the error message upon validation, null returned if no errors are set
      * @return string $error
@@ -33,5 +37,19 @@ abstract class AbstractValidator implements Validator
         }
 
         return $this->error;
+    }
+
+    /**
+     * Probably doesn't need to be included in the interface
+     * @return int|null
+     * @throws PrematureErrorCallException
+     */
+    public function getErrorCode() : ?int
+    {
+        if ($this->validated == false) {
+            throw new PrematureErrorCallException();
+        }
+
+        return $this->errorCode;
     }
 }
