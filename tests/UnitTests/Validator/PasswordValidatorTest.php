@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace GreenTea\Phypes\Validator;
 
+use GreenTea\Phypes\Exception\PrematureErrorCallException;
 use PHPUnit\Framework\TestCase;
 
 class PasswordValidatorTest extends TestCase
@@ -81,4 +82,62 @@ class PasswordValidatorTest extends TestCase
         $result = $this->validator->isValid('Pa!1sswo');
         $this->assertTrue($result);
     }
+
+    /**
+     * Failure type #1: length
+     */
+    public function testErrorMessageOnLength() : void
+    {
+        $this->validator->isValid('pass');
+        $result = $this->validator->getErrorMessage();
+        $this->assertEquals('The password is not at least 8 characters long', $result);
+    }
+
+    /**
+     * Failure type #2: variety
+     */
+    public function testErrorMessageOnDiversity() : void
+    {
+        // This test fails with "easypassword1_", is "_" considered a numeric or alphabet?
+        $expectation = 'The password does not contain at least 3 of these character types:' .
+            ' lower case, upper case, numeric and special characters';
+
+        $this->validator->isValid('easypassword');
+        $result = $this->validator->getErrorMessage();
+
+        $this->assertEquals($expectation, $result);
+
+        $this->validator->isValid('easypassword1');
+        $result = $this->validator->getErrorMessage();
+
+        $this->assertEquals($expectation, $result);
+    }
+
+    /**
+     * Expecting a null message on no error validation
+     */
+    public function testValidPasswordErrorMsg() : void
+    {
+        $this->validator->isValid('easypasswordA!');
+        $result = $this->validator->getErrorMessage();
+
+        $this->assertNull($result);
+    }
+
+    public function testMultipleValidatioError() : void
+    {
+        $this->testErrorMessageOnLength();
+        $this->testValidPasswordErrorMsg();
+
+    }
+
+    /**
+     * Expect an exception to be thrown on calling getErrorMessage() before isValid()
+     */
+    public function testExceptionOnPrematureErrorRetrieval() : void
+    {
+        $this->expectException(PrematureErrorCallException::class);
+        $this->validator->getErrorMessage();
+    }
+
 }
