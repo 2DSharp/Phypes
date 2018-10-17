@@ -19,6 +19,7 @@ class Email implements Type
      * @param string $email
      * @param Validator $validator
      * @throws \InvalidArgumentException
+     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $email, Validator $validator = null)
     {
@@ -28,7 +29,7 @@ class Email implements Type
         }
 
         if (!$validator->isValid($email)) {
-            throw new \InvalidArgumentException('The provided email address in invalid.');
+            throw new \InvalidArgumentException($validator->getErrorMessage());
         }
         $this->email = $email;
     }

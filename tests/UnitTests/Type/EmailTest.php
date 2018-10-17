@@ -37,9 +37,9 @@ final class EmailTest extends TestCase
 
         $validator = Mockery::mock(Validator::class);
         $validator->allows()->isValid($failingValue)->andReturns(false);
+        $validator->allows()->getErrorMessage()->andReturns('The provided email is invalid.');
 
         $this->expectException(\InvalidArgumentException::class);
-
         new Email($failingValue, $validator);
     }
 
@@ -47,6 +47,7 @@ final class EmailTest extends TestCase
      * Return a valid email address object passing validation on the mock.
      * @param string $validEmail
      * @return Email
+     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
      */
     private function getValidEmail(string $validEmail) : Email
     {
