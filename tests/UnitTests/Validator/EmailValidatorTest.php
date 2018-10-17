@@ -1,12 +1,6 @@
 <?php
 declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: dedipyaman
- * Date: 9/4/18
- * Time: 11:56 PM
- */
 
 namespace GreenTea\Phypes\Validator;
 

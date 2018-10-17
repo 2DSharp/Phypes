@@ -1,11 +1,5 @@
 <?php
 declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: dedipyaman
- * Date: 8/31/18
- * Time: 1:17 AM
- */
 
 namespace GreenTea\Phypes\Type;
 

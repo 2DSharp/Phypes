@@ -1,13 +1,6 @@
 <?php
 declare(strict_types=1);
 
-/**
- * Created by PhpStorm.
- * User: dedipyaman
- * Date: 9/4/18
- * Time: 11:10 PM
- */
-
 namespace GreenTea\Phypes\Validator;
 
 use GreenTea\Phypes\Exception\PrematureErrorCallException;
@@ -41,7 +34,7 @@ class EmailValidator implements Validator
     public function getErrorMessage(): string
     {
         /**
-         * Extra check to make sure someone doesn't call this method before actually calling isValid
+         * Extra check to make sure someone doesn't call this method before actually calling isValid()
          */
         if ($this->validated == false) {
             throw new PrematureErrorCallException();
