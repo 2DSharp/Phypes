@@ -52,15 +52,26 @@ class EmailValidatorTest extends TestCase
         $this->assertEquals('The provided email is invalid.', $result);
     }
 
+    public function testErrorCodeReturned() : void
+    {
+        $this->validator->isValid('invalid email');
+        $result = $this->validator->getErrorCode();
+
+        $this->assertEquals(Error::EMAIL_INVALID, $result);
+    }
+
     /**
      * Make sure the error message is null on valid data
      */
-    public function testNoErrorMessageOnValidEmail() : void
+    public function testNoErrorOnValidEmail() : void
     {
         $this->validator->isValid('2d@twodee.me');
-        $result = $this->validator->getErrorMessage();
+        $msg = $this->validator->getErrorMessage();
+        $code = $this->validator->getErrorCode();
 
-        $this->assertNull($result);
+        $this->assertNull($msg);
+        $this->assertNull($code);
+
     }
 
     /**
@@ -69,7 +80,7 @@ class EmailValidatorTest extends TestCase
     public function testWithMultipleValidations() : void
     {
         $this->testErrorMessageReturned();
-        $this->testNoErrorMessageOnValidEmail();
+        $this->testNoErrorOnValidEmail();
     }
 
     /**

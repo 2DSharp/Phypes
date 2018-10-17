@@ -93,6 +93,12 @@ class PasswordValidatorTest extends TestCase
         $this->assertEquals('The password is not at least 8 characters long', $result);
     }
 
+    public function testErrorCodeOnLength() : void
+    {
+        $this->validator->isValid('pass');
+        $result = $this->validator->getErrorCode();
+        $this->assertEquals(Error::PASSWORD_TOO_SMALL, $result);
+    }
     /**
      * Failure type #2: variety
      */
@@ -113,21 +119,38 @@ class PasswordValidatorTest extends TestCase
         $this->assertEquals($expectation, $result);
     }
 
+    public function testErrorCodeOnDiversity() : void
+    {
+        $expectation = Error::PASSWORD_NOT_MULTI_CHARACTER;
+
+        $this->validator->isValid('easypassword');
+        $result = $this->validator->getErrorCode();
+
+        $this->assertEquals($expectation, $result);
+
+        $this->validator->isValid('easypassword1');
+        $result = $this->validator->getErrorCode();
+
+        $this->assertEquals($expectation, $result);
+    }
     /**
      * Expecting a null message on no error validation
      */
-    public function testValidPasswordErrorMsg() : void
+    public function testValidPasswordErrorOutput() : void
     {
         $this->validator->isValid('easypasswordA!');
-        $result = $this->validator->getErrorMessage();
 
-        $this->assertNull($result);
+        $errorMsg = $this->validator->getErrorMessage();
+        $errorCode = $this->validator->getErrorMessage();
+
+        $this->assertNull($errorCode);
+        $this->assertNull($errorMsg);
     }
 
-    public function testMultipleValidatioError() : void
+    public function testMultipleValidationError() : void
     {
         $this->testErrorMessageOnLength();
-        $this->testValidPasswordErrorMsg();
+        $this->testValidPasswordErrorOutput();
 
     }
 
