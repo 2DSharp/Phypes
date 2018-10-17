@@ -39,7 +39,7 @@ final class EmailTest extends TestCase
      */
     public function testExceptionOnFailure() : void
     {
-        $failingValue = "john@12.";
+        $failingValue = 'john@12.';
 
         $validator = Mockery::mock(Validator::class);
         $validator->allows()->isValid($failingValue)->andReturns(false);
