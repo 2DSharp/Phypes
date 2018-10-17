@@ -8,7 +8,7 @@ use GreenTea\Phypes\Exception\PrematureErrorCallException;
 class EmailValidator implements Validator
 {
     /**
-     * @var string $error
+     * @var string|null $error
      * Stores the error message on validation failure
      */
     private $error;
@@ -19,7 +19,7 @@ class EmailValidator implements Validator
         $this->validated = true;
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->error = '';
+            $this->error = null;
             return true;
         }
         $this->error = 'The provided email is invalid.';
@@ -27,11 +27,11 @@ class EmailValidator implements Validator
     }
 
     /**
-     * Return the error message upon validation, empty string returned if no errors are set
+     * Return the error message upon validation, null returned if no errors are set
      * @return string $error
      * @throws PrematureErrorCallException
      */
-    public function getErrorMessage(): string
+    public function getErrorMessage(): ?string
     {
         /**
          * Extra check to make sure someone doesn't call this method before actually calling isValid()
@@ -39,9 +39,7 @@ class EmailValidator implements Validator
         if ($this->validated == false) {
             throw new PrematureErrorCallException();
         }
-        if (is_null($this->error)) {
-            return '';
-        }
+
         return $this->error;
     }
 }

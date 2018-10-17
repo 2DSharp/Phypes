@@ -60,7 +60,7 @@ class EmailValidatorTest extends TestCase
         $this->validator->isValid('2d@twodee.me');
         $result = $this->validator->getErrorMessage();
 
-        $this->assertEmpty($result);
+        $this->assertNull($result);
     }
 
     /**
