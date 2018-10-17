@@ -8,6 +8,10 @@ class PasswordValidator implements Validator
 {
     public function isValid($password, $options = []): bool
     {
+        if (strlen($password) < 8) {
+            return false;
+        }
+
         $differentCharacterTypes = 0;
 
         if (preg_match('/[a-z]/', $password)) {

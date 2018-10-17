@@ -63,4 +63,22 @@ class PasswordValidatorTest extends TestCase
         $result = $this->validator->isValid('Password');
         $this->assertFalse($result);
     }
+
+    /**
+     * Should fail and return false
+     */
+    public function testShortPassword() : void
+    {
+        $result = $this->validator->isValid('Pa!1');
+        $this->assertFalse($result);
+    }
+
+    /**
+     * Should pass and return true
+     */
+    public function test8CharacterPassword() : void
+    {
+        $result = $this->validator->isValid('Pa!1sswo');
+        $this->assertTrue($result);
+    }
 }
