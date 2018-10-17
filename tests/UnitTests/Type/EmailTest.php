@@ -33,6 +33,7 @@ final class EmailTest extends TestCase
         $validator = Mockery::mock(Validator::class);
         $validator->allows()->isValid($failingValue)->andReturns(false);
         $validator->allows()->getErrorMessage()->andReturns('The provided email is invalid.');
+        $validator->allows()->getErrorCode()->andReturns(111);
 
         $this->expectException(\InvalidArgumentException::class);
         new Email($failingValue, $validator);

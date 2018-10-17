@@ -29,7 +29,7 @@ class Email implements Type
         }
 
         if (!$validator->isValid($email)) {
-            throw new \InvalidArgumentException($validator->getErrorMessage());
+            throw new \InvalidArgumentException($validator->getErrorMessage(), $validator->getErrorCode());
         }
         $this->email = $email;
     }

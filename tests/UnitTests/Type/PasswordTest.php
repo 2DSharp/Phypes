@@ -33,6 +33,8 @@ final class PasswordTest extends TestCase
         $validator = Mockery::mock(Validator::class);
         $validator->allows()->isValid($failingValue)->andReturns(false);
         $validator->allows()->getErrorMessage()->andReturns("Some error message that shouldn't matter here");
+        $validator->allows()->getErrorCode()->andReturns(000);
+
         $this->expectException(\InvalidArgumentException::class);
 
         new Password($failingValue, $validator);

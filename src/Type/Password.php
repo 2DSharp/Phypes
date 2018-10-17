@@ -28,7 +28,7 @@ class Password implements Type
         }
 
         if (!$validator->isValid($password)) {
-            throw new \InvalidArgumentException($validator->getErrorMessage());
+            throw new \InvalidArgumentException($validator->getErrorMessage(), $validator->getErrorCode());
         }
         $this->password = $password;
     }
