@@ -3,17 +3,8 @@ declare(strict_types=1);
 
 namespace GreenTea\Phypes\Validator;
 
-use GreenTea\Phypes\Exception\PrematureErrorCallException;
-
-class PasswordValidator implements Validator
+class PasswordValidator extends AbstractValidator implements Validator
 {
-    /**
-     * @var string|null $error
-     * Stores the error message on validation failure
-     */
-    private $error;
-    private $validated = false;
-
     /**
      * Check if the password has a diverse character type set for a strong-enough password
      * Uppercase, lowercase combo etc.
@@ -81,18 +72,5 @@ class PasswordValidator implements Validator
 
         $this->error = null;
         return true;
-    }
-
-    /**
-     * @return null|string
-     * @throws PrematureErrorCallException
-     */
-    public function getErrorMessage(): ?string
-    {
-        if ($this->validated == false) {
-            throw new PrematureErrorCallException();
-        }
-
-        return $this->error;
     }
 }

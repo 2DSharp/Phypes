@@ -5,15 +5,8 @@ namespace GreenTea\Phypes\Validator;
 
 use GreenTea\Phypes\Exception\PrematureErrorCallException;
 
-class EmailValidator implements Validator
+class EmailValidator extends AbstractValidator implements Validator
 {
-    /**
-     * @var string|null $error
-     * Stores the error message on validation failure
-     */
-    private $error;
-    private $validated = false;
-
     public function isValid($email, $options = []): bool
     {
         $this->validated = true;
@@ -26,20 +19,5 @@ class EmailValidator implements Validator
         return false;
     }
 
-    /**
-     * Return the error message upon validation, null returned if no errors are set
-     * @return string $error
-     * @throws PrematureErrorCallException
-     */
-    public function getErrorMessage(): ?string
-    {
-        /**
-         * Extra check to make sure someone doesn't call this method before actually calling isValid()
-         */
-        if ($this->validated == false) {
-            throw new PrematureErrorCallException();
-        }
 
-        return $this->error;
-    }
 }
