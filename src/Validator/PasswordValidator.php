@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace GreenTea\Phypes\Validator;
 
-class PasswordValidator extends AbstractValidator implements Validator
+class PasswordValidator extends AbstractValidator
 {
     /**
      * Check if the password has a diverse character type set for a strong-enough password

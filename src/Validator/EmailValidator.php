@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace GreenTea\Phypes\Validator;
 
-use GreenTea\Phypes\Exception\PrematureErrorCallException;
-
-class EmailValidator extends AbstractValidator implements Validator
+class EmailValidator extends AbstractValidator
 {
     public function isValid($email, $options = []): bool
     {
@@ -18,6 +16,4 @@ class EmailValidator extends AbstractValidator implements Validator
         $this->error = 'The provided email is invalid.';
         return false;
     }
-
-
 }
