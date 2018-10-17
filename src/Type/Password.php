@@ -18,6 +18,7 @@ class Password implements Type
      * @param string $password
      * @param Validator $validator
      * @throws \InvalidArgumentException
+     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $password, Validator $validator = null)
     {
@@ -27,7 +28,7 @@ class Password implements Type
         }
 
         if (!$validator->isValid($password)) {
-            throw new \InvalidArgumentException('The provided password is invalid.');
+            throw new \InvalidArgumentException($validator->getErrorMessage());
         }
         $this->password = $password;
     }

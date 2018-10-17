@@ -2,7 +2,6 @@
 
 namespace GreenTea\Phypes\Validator;
 
-
 use GreenTea\Phypes\Exception\PrematureErrorCallException;
 
 abstract class AbstractValidator implements Validator

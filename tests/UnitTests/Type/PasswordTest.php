@@ -32,7 +32,7 @@ final class PasswordTest extends TestCase
 
         $validator = Mockery::mock(Validator::class);
         $validator->allows()->isValid($failingValue)->andReturns(false);
-
+        $validator->allows()->getErrorMessage()->andReturns("Some error message that shouldn't matter here");
         $this->expectException(\InvalidArgumentException::class);
 
         new Password($failingValue, $validator);
@@ -42,6 +42,7 @@ final class PasswordTest extends TestCase
      * Return a valid Password object passing validation on the mock.
      * @param string $validPassword
      * @return Password
+     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
      */
     private function getValidPassword(string $validPassword) : Password
     {
