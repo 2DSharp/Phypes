@@ -45,6 +45,9 @@ class IPAddressValidatorTest extends TestCase
         $this->assertFalse($result);
     }
 
+    /**
+     * Should fail and return the IP address invalid error code
+     */
     public function testErrorCodeOnFailure() : void
     {
         $this->validator->isValid('123312');
@@ -53,6 +56,9 @@ class IPAddressValidatorTest extends TestCase
         $this->assertEquals(Error::IP_INVALID, $result);
     }
 
+    /**
+     * Should pass and return null error code and message.
+     */
     public function testErrorOnPass() : void
     {
         $this->validator->isValid('192.168.0.0');
@@ -64,13 +70,16 @@ class IPAddressValidatorTest extends TestCase
         $this->assertNull($msg);
     }
 
+    /**
+     * Should fail and pass. Have the message and code unaffected by a different function call.
+     */
     public function testMultipleValidations() : void
     {
         $this->testErrorCodeOnFailure();
         $this->testErrorOnPass();
     }
 
-    private function correctIpAddresses()
+    public function correctIpAddresses()
     {
         return [
             yield [
