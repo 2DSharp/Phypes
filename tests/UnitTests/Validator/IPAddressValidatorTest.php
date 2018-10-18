@@ -45,7 +45,32 @@ class IPAddressValidatorTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function correctIpAddresses()
+    public function testErrorCodeOnFailure() : void
+    {
+        $this->validator->isValid('123312');
+        $result = $this->validator->getErrorCode();
+
+        $this->assertEquals(Error::IP_INVALID, $result);
+    }
+
+    public function testErrorOnPass() : void
+    {
+        $this->validator->isValid('192.168.0.0');
+
+        $code = $this->validator->getErrorCode();
+        $msg = $this->validator->getErrorMessage();
+
+        $this->assertNull($code);
+        $this->assertNull($msg);
+    }
+
+    public function testMultipleValidations() : void
+    {
+        $this->testErrorCodeOnFailure();
+        $this->testErrorOnPass();
+    }
+
+    private function correctIpAddresses()
     {
         return [
             yield [
