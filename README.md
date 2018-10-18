@@ -22,7 +22,7 @@ validation, user-defined validators can easily be supplied as an argument to the
 Create entity classes requiring the types as dependencies:
 
 **User.php**
-```
+```php
 class User
 {
   private $email;
@@ -46,7 +46,7 @@ class User
 Retrieve the data from the browser and store it in their correct types:
 
 **SignUpController.php**
-```
+```php
 try {
   // Get the user data
   $email = new Email($_POST['email']);
@@ -70,7 +70,7 @@ There are two ways to specify a validator.
 Either by implementing the `Validator` interface and putting in the custom validation rules:
 
 **CustomPasswordValidator.php**
-```
+```php
 <?php
 declare(strict_types=1);
 
@@ -112,7 +112,7 @@ Or by extending the `AbstractValidator`, which requires the `validated` protecte
 variable to be set on calling is valid to disallow calling `getMessage()` without validating first:
 
 **CustomPasswordValidator.php**
-```
+```php
 <?php
 declare(strict_types=1);
 
