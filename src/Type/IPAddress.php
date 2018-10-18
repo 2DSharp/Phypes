@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace GreenTea\Phypes\Type;
 
-use GreenTea\Phypes\Type\Type;
-use GreenTea\Phypes\Validator\IPValidator;
+use GreenTea\Phypes\Validator\Error;
+use GreenTea\Phypes\Validator\IPAddressValidator;
 use GreenTea\Phypes\Validator\Validator;
 
 class IPAddress implements Type
@@ -19,16 +19,17 @@ class IPAddress implements Type
      * @param string $ip
      * @param Validator $validator
      * @throws \InvalidArgumentException
+     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $ip, Validator $validator = null)
     {
         if ($validator == null) {
             // use the default validator
-            $validator = new IPValidator();
+            $validator = new IPAddressValidator();
         }
 
         if (!$validator->isValid($ip)) {
-            throw new \InvalidArgumentException("The provided ip address in invalid.");
+            throw new \InvalidArgumentException($validator->getErrorMessage(), $validator->getErrorCode());
         }
         $this->ip = $ip;
     }

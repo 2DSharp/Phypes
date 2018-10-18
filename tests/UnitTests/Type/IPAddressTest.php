@@ -37,6 +37,8 @@ final class IPAddressTest extends TestCase
 
         $validator = Mockery::mock(Validator::class);
         $validator->allows()->isValid($failingValue)->andReturns(false);
+        $validator->allows()->getErrorMessage()->andReturns('IP Invalid');
+        $validator->allows()->getErrorCode()->andReturn(222);
 
         $this->expectException(\InvalidArgumentException::class);
 
