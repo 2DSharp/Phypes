@@ -76,7 +76,7 @@ declare(strict_types=1);
 
 namespace Sample\Foo;
 
-class PasswordValidator implements Validator
+class CustomPasswordValidator implements Validator
 {
     private $error;
     private $errorCode;
@@ -118,7 +118,7 @@ declare(strict_types=1);
 
 namespace Sample\Foo;
 
-class PasswordValidator extends AbstractValidator
+class CustomPasswordValidator extends AbstractValidator
 {
     private function isLongEnough(string $password) : bool
     {
@@ -140,6 +140,12 @@ class PasswordValidator extends AbstractValidator
   }
   ```
   which doesn't require an implementation of `getErrorMessage()` which is already done in the parent class.
+  
+  And then simply switch in the custom validator in the type.
+  ```php
+  $pass = new Password($_POST['password'], new CustomPasswordValidator());
+  ```
+  That's it. The password will be verified based on your validation rules.
   
   Any new types can be created by simply implementing the `Type` interface and adding a validator. A set of
   standard validators have already been provided with the library which will suffice for a lot of use cases.
