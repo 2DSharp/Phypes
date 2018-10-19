@@ -59,7 +59,7 @@ try {
   $userMapper = new UserMapper();
   $userMapper->register($user);
 
-} catch(\InvalidArgumentException $e) {
+} catch(InvalidArgumentException $e) {
   $this->displayError($e->getMessage());
 }
 ```
