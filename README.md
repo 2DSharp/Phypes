@@ -76,6 +76,9 @@ declare(strict_types=1);
 
 namespace Sample\Foo;
 
+use GreenTea\Phypes\Validator\Validator;
+use GreenTea\Phypes\Validator\Error;
+
 class CustomPasswordValidator implements Validator
 {
     private $error;
@@ -117,6 +120,10 @@ variable to be set on calling is valid to disallow calling `getMessage()` withou
 declare(strict_types=1);
 
 namespace Sample\Foo;
+
+
+use GreenTea\Phypes\Validator\AbstractValidator;
+use GreenTea\Phypes\Validator\Error;
 
 class CustomPasswordValidator extends AbstractValidator
 {
