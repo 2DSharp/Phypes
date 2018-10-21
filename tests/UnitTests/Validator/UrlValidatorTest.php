@@ -92,6 +92,18 @@ class UrlValidatorTest extends TestCase
                 'https://www.fb.io/some/path?a=1&b=14',
             ],
             yield [
+                'ftp://google.com',
+            ],
+            yield [
+                'sftp://www.fb.io/some/path',
+            ],
+            yield [
+                'ws://192.168.1.15:8000',
+            ],
+            yield [
+                'wss://192.168.1.15:8000/messages',
+            ],
+            yield [
                 '//yahoo.com',
             ],
         ];

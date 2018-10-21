@@ -22,13 +22,21 @@ class UrlValidator extends AbstractValidator
             (?:\? (?:[\pL\pN\-._\~!$&\'()*+,;=:@/?]|%%[0-9A-Fa-f]{2})* )?   # a query (optional)
             (?:\# (?:[\pL\pN\-._\~!$&\'()*+,;=:@/?]|%%[0-9A-Fa-f]{2})* )?   # a fragment (optional)
         $~ixu';
+    private const ALLOWED_SCHEMES = [
+        'http',
+        'https',
+        'ftp',
+        'sftp',
+        'ws',
+        'wss',
+    ];
 
     public function isValid($url, $options = []): bool
     {
         $this->validated = true;
 
         $pattern = 0 === strpos($url, '//') ? str_replace('(%s):', '(?:(%s):)?', static::PATTERN) : static::PATTERN;
-        $pattern = sprintf($pattern, 'http|https');
+        $pattern = sprintf($pattern, implode('|', self::ALLOWED_SCHEMES));
 
         if (preg_match($pattern, $url)) {
             $this->error = $this->errorCode = null;
