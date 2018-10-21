@@ -17,4 +17,5 @@ abstract class Error
     const PASSWORD_TOO_SMALL = 320002;
     const PASSWORD_NOT_MULTI_CHARACTER = 32003;
     const IP_INVALID = 32004;
+    const URL_INVALID = 32005;
 }

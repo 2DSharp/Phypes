@@ -44,7 +44,7 @@ class UrlValidator extends AbstractValidator
             return true;
         }
 
-        $this->errorCode = Error::IP_INVALID;
+        $this->errorCode = Error::URL_INVALID;
         $this->error = 'Provided URL is invalid.';
 
         return false;

@@ -46,14 +46,14 @@ class UrlValidatorTest extends TestCase
     }
 
     /**
-     * Should fail and return the Invalid URL error code
+     * Should fail and return the URL_INVALID error code
      */
     public function testErrorCodeOnFailure() : void
     {
         $this->validator->isValid('123312');
         $result = $this->validator->getErrorCode();
 
-        $this->assertEquals(Error::IP_INVALID, $result);
+        $this->assertEquals(Error::URL_INVALID, $result);
     }
 
     /**
