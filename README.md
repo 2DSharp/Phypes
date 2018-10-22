@@ -25,7 +25,7 @@ composer require twodee/phypes
 To get the latest version from github:
 
 ```
-git clone git://github.com/rdlowrey/auryn.git
+git clone git://github.com/2DSharp/phypes.git
 ```
 
 
