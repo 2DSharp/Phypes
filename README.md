@@ -17,6 +17,18 @@ validation failure along with the error message and code describing the error.
 A standard set of data types with validators have been provided in the library. For custom 
 validation, user-defined validators can easily be supplied as an argument to the Type.
 
+## Installation
+The recommended way to install Phypes is through [composer](https://getcomposer.org/):
+```
+composer require twodee/phypes
+```
+To get the latest version from github:
+
+```
+git clone git://github.com/2DSharp/phypes.git
+```
+
+
 ## Usage
 
 Create entity classes requiring the types as dependencies:
