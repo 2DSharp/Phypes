@@ -2,7 +2,7 @@
     "name": "twodee/phypes",
     "type": "library",
     "homepage": "https://github.com/2dsharp/Phypes",
-    "license": "GPL-2.0-only",
+    "license": "GPL-2.0",
     "description": "Validation components for commonly used data with value objects.",
     "keywords": ["validation", "forms", "data", "value objects"],
 
@@ -29,7 +29,6 @@
         "psr/log": "1.*"
     },
     "require-dev": {
-        "php": ">=7.2",
         "ext-pdo_sqlite": "*",
         "phpunit/phpunit": "^7",
         "mockery/mockery": "^1.1"
