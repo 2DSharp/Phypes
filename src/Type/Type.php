@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Type;
+namespace Phypes\Type;
 
 interface Type
 {

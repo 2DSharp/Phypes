@@ -1,8 +1,8 @@
 <?php
 
-namespace GreenTea\Phypes\Validator;
+namespace Phypes\Validator;
 
-use GreenTea\Phypes\Exception\PrematureErrorCallException;
+use Phypes\Exception\PrematureErrorCallException;
 
 abstract class AbstractValidator implements Validator
 {

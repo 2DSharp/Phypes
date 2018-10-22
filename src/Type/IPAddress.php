@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Type;
+namespace Phypes\Type;
 
-use GreenTea\Phypes\Validator\Error;
-use GreenTea\Phypes\Validator\IPAddressValidator;
-use GreenTea\Phypes\Validator\Validator;
+use Phypes\Validator\Error;
+use Phypes\Validator\IPAddressValidator;
+use Phypes\Validator\Validator;
 
 class IPAddress implements Type
 {
@@ -19,7 +19,7 @@ class IPAddress implements Type
      * @param string $ip
      * @param Validator $validator
      * @throws \InvalidArgumentException
-     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
+     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $ip, Validator $validator = null)
     {

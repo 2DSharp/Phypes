@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Type;
+namespace Phypes\UnitTest\Type;
 
-use GreenTea\Phypes\Validator\Validator;
+use Phypes\Type\Email;
+use Phypes\Type\Type;
+use Phypes\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 
@@ -43,7 +45,7 @@ final class EmailTest extends TestCase
      * Return a valid email address object passing validation on the mock.
      * @param string $validEmail
      * @return Email
-     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
+     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     private function getValidEmail(string $validEmail) : Email
     {

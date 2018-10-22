@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Validator;
+namespace Phypes\Validator;
 
 class PasswordValidator extends AbstractValidator
 {

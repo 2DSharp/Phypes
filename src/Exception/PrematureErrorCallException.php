@@ -6,10 +6,10 @@
  * Time: 8:03 PM
  */
 
-namespace GreenTea\Phypes\Exception;
+namespace Phypes\Exception;
 
 
-use GreenTea\Phypes\Validator\Error;
+use Phypes\Validator\Error;
 
 class PrematureErrorCallException extends \Exception
 {

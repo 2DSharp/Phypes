@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Type;
+namespace Phypes\Type;
 
-use GreenTea\Phypes\Validator\PasswordValidator;
-use GreenTea\Phypes\Validator\Validator;
+use Phypes\Validator\PasswordValidator;
+use Phypes\Validator\Validator;
 
 class Password implements Type
 {
@@ -18,7 +18,7 @@ class Password implements Type
      * @param string $password
      * @param Validator $validator
      * @throws \InvalidArgumentException
-     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
+     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $password, Validator $validator = null)
     {

@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Type;
+namespace Phypes\UnitTest\Type;
 
-use GreenTea\Phypes\Validator\Validator;
+use Phypes\Type\IPAddress;
+use Phypes\Type\Type;
+use Phypes\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 
@@ -49,7 +51,7 @@ final class IPAddressTest extends TestCase
      * Return a valid ip address object passing validation on the mock.
      * @param string $validIPAddress
      * @return IPAddress
-     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
+     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     private function getValidIPAddress(string $validIPAddress) : IPAddress
     {

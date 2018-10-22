@@ -6,7 +6,7 @@
  * Time: 1:15 AM
  */
 
-namespace GreenTea\Phypes\Validator;
+namespace Phypes\Validator;
 
 
 abstract class Error

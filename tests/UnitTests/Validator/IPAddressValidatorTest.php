@@ -1,9 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Validator;
+namespace Phypes\UnitTest\Validator;
 
 use PHPUnit\Framework\TestCase;
+use Phypes\Exception\PrematureErrorCallException;
+use Phypes\Validator\Error;
+use Phypes\Validator\IPAddressValidator;
+use Phypes\Validator\Validator;
 
 class IPAddressValidatorTest extends TestCase
 {
@@ -77,6 +81,16 @@ class IPAddressValidatorTest extends TestCase
     {
         $this->testErrorCodeOnFailure();
         $this->testErrorOnPass();
+    }
+
+
+    /**
+     * Expect an exception to be thrown on calling getErrorMessage() before isValid()
+     */
+    public function testExceptionOnPrematureErrorRetrieval() : void
+    {
+        $this->expectException(PrematureErrorCallException::class);
+        $this->validator->getErrorMessage();
     }
 
     public function correctIpAddresses()

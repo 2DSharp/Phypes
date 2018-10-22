@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Type;
+namespace Phypes\UnitTest\Type;
 
-use GreenTea\Phypes\Validator\Validator;
+use Phypes\Type\Password;
+use Phypes\Type\Type;
+use Phypes\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 
@@ -44,7 +46,7 @@ final class PasswordTest extends TestCase
      * Return a valid Password object passing validation on the mock.
      * @param string $validPassword
      * @return Password
-     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
+     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     private function getValidPassword(string $validPassword) : Password
     {

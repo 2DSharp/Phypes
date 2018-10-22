@@ -1,10 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Validator;
+namespace Phypes\UnitTest\Validator;
 
-use GreenTea\Phypes\Exception\PrematureErrorCallException;
+use Phypes\Exception\PrematureErrorCallException;
 use PHPUnit\Framework\TestCase;
+use Phypes\Validator\Error;
+use Phypes\Validator\PasswordValidator;
+use Phypes\Validator\Validator;
 
 class PasswordValidatorTest extends TestCase
 {

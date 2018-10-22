@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace GreenTea\Phypes\Type;
+namespace Phypes\Type;
 
-use GreenTea\Phypes\Validator\EmailValidator;
-use GreenTea\Phypes\Validator\Validator;
+use Phypes\Validator\EmailValidator;
+use Phypes\Validator\Validator;
 
 class Email implements Type
 {
@@ -18,7 +18,7 @@ class Email implements Type
      * @param string $email
      * @param Validator $validator
      * @throws \InvalidArgumentException
-     * @throws \GreenTea\Phypes\Exception\PrematureErrorCallException
+     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $email, Validator $validator = null)
     {
