@@ -1,5 +1,5 @@
 {
-    "name": "GreenTea/Phypes",
+    "name": "twodee/phypes",
     "type": "library",
     "homepage": "https://github.com/2dsharp/Phypes",
     "license": "GPL-V2",
@@ -15,9 +15,14 @@
     ],
 
     "autoload": {
-        "psr-4": { "GreenTea\\Phypes\\": "src/" }
+      "psr-4": { "Phypes\\": "src/" }
     },
 
+    "autoload-dev": {
+      "psr-4": {
+        "Phypes\\UnitTest\\" : "tests/UnitTests/"
+      }
+    },
     "require": {
         "php": ">=7.2",
         "ext-pdo": "*",
