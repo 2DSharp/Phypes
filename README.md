@@ -76,8 +76,8 @@ declare(strict_types=1);
 
 namespace Sample\Foo;
 
-use GreenTea\Phypes\Validator\Validator;
-use GreenTea\Phypes\Validator\Error;
+use Phypes\Validator\Validator;
+use Phypes\Validator\Error;
 
 class CustomPasswordValidator implements Validator
 {
@@ -122,8 +122,8 @@ declare(strict_types=1);
 namespace Sample\Foo;
 
 
-use GreenTea\Phypes\Validator\AbstractValidator;
-use GreenTea\Phypes\Validator\Error;
+use Phypes\Validator\AbstractValidator;
+use Phypes\Validator\Error;
 
 class CustomPasswordValidator extends AbstractValidator
 {
