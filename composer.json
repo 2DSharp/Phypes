@@ -2,7 +2,7 @@
     "name": "twodee/phypes",
     "type": "library",
     "homepage": "https://github.com/2dsharp/Phypes",
-    "license": "GPL-2.0",
+    "license": "GPL-3.0",
     "description": "Validation components for commonly used data with value objects.",
     "keywords": ["validation", "forms", "data", "value objects"],
 
