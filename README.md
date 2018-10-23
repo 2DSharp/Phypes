@@ -1,4 +1,6 @@
 # Phypes
+[![Build Status](https://scrutinizer-ci.com/g/2DSharp/Phypes/badges/build.png?b=master)](https://scrutinizer-ci.com/g/2DSharp/Phypes/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/2DSharp/Phypes/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/2DSharp/Phypes/?branch=master)
+
 A Value Objects library with type validation for PHP.
 
 ## Introduction
