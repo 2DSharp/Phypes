@@ -7,7 +7,7 @@ namespace Phypes\UnitTest\Validator;
 use Phypes\Exception\PrematureErrorCallException;
 use PHPUnit\Framework\TestCase;
 use Phypes\Validator\EmailValidator;
-use Phypes\Validator\Error;
+use Phypes\Validator\ErrorCode;
 use Phypes\Validator\Validator;
 
 class EmailValidatorTest extends TestCase
@@ -60,7 +60,7 @@ class EmailValidatorTest extends TestCase
         $this->validator->isValid('invalid email');
         $result = $this->validator->getErrorCode();
 
-        $this->assertEquals(Error::EMAIL_INVALID, $result);
+        $this->assertEquals(ErrorCode::EMAIL_INVALID, $result);
     }
 
     /**

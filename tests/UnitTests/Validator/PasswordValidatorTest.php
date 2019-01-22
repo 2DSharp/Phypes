@@ -5,7 +5,7 @@ namespace Phypes\UnitTest\Validator;
 
 use Phypes\Exception\PrematureErrorCallException;
 use PHPUnit\Framework\TestCase;
-use Phypes\Validator\Error;
+use Phypes\Validator\ErrorCode;
 use Phypes\Validator\PasswordValidator;
 use Phypes\Validator\Validator;
 
@@ -100,7 +100,7 @@ class PasswordValidatorTest extends TestCase
     {
         $this->validator->isValid('pass');
         $result = $this->validator->getErrorCode();
-        $this->assertEquals(Error::PASSWORD_TOO_SMALL, $result);
+        $this->assertEquals(ErrorCode::PASSWORD_TOO_SMALL, $result);
     }
     /**
      * Failure type #2: variety
@@ -124,7 +124,7 @@ class PasswordValidatorTest extends TestCase
 
     public function testErrorCodeOnDiversity() : void
     {
-        $expectation = Error::PASSWORD_NOT_MULTI_CHARACTER;
+        $expectation = ErrorCode::PASSWORD_NOT_MULTI_CHARACTER;
 
         $this->validator->isValid('easypassword');
         $result = $this->validator->getErrorCode();

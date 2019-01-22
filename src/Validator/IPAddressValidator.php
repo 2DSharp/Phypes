@@ -13,7 +13,7 @@ class IPAddressValidator extends AbstractValidator
             $this->error = $this->errorCode = null;
             return true;
         }
-        $this->errorCode = Error::IP_INVALID;
+        $this->errorCode = ErrorCode::IP_INVALID;
         $this->error = 'The provided IP Address is invalid.';
         return false;
     }

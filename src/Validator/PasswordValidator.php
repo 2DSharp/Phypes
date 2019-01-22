@@ -60,13 +60,13 @@ class PasswordValidator extends AbstractValidator
         $this->validated = true;
 
         if (!$this->isLongEnough($password, 8)) {
-            $this->errorCode = Error::PASSWORD_TOO_SMALL;
+            $this->errorCode = ErrorCode::PASSWORD_TOO_SMALL;
             $this->error = 'The password is not at least 8 characters long';
             return false;
         }
 
         if (!$this->hasMultiCharTypes($password)) {
-            $this->errorCode = Error::PASSWORD_NOT_MULTI_CHARACTER;
+            $this->errorCode = ErrorCode::PASSWORD_NOT_MULTI_CHARACTER;
             $this->error = 'The password does not contain at least 3 of these character types:' .
                 ' lower case, upper case, numeric and special characters';
             return false;

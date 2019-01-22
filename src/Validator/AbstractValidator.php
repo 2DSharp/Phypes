@@ -3,6 +3,7 @@
 namespace Phypes\Validator;
 
 use Phypes\Exception\PrematureErrorCallException;
+use Phypes\ErrorCode\Result;
 
 abstract class AbstractValidator implements Validator
 {
@@ -51,5 +52,13 @@ abstract class AbstractValidator implements Validator
         }
 
         return $this->errorCode;
+    }
+
+    protected function success()
+    {
+        return new Result(true);
+    }
+    protected function failure($errors = []) {
+        return new Result(false, $errors);
     }
 }

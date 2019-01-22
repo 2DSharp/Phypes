@@ -9,7 +9,7 @@
 namespace Phypes\Exception;
 
 
-use Phypes\Validator\Error;
+use Phypes\Validator\ErrorCode;
 
 class PrematureErrorCallException extends \Exception
 {
@@ -17,7 +17,7 @@ class PrematureErrorCallException extends \Exception
     {
         // Do not allow error messages to be displayed before validating
         parent::__construct("Attempting to get error message before validation.",
-            Error::PREMATURE_CALL_TO_METHOD);
+            ErrorCode::PREMATURE_CALL_TO_METHOD);
     }
 
     // custom string representation of object

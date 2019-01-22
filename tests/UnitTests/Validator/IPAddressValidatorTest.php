@@ -5,7 +5,7 @@ namespace Phypes\UnitTest\Validator;
 
 use PHPUnit\Framework\TestCase;
 use Phypes\Exception\PrematureErrorCallException;
-use Phypes\Validator\Error;
+use Phypes\Validator\ErrorCode;
 use Phypes\Validator\IPAddressValidator;
 use Phypes\Validator\Validator;
 
@@ -57,7 +57,7 @@ class IPAddressValidatorTest extends TestCase
         $this->validator->isValid('123312');
         $result = $this->validator->getErrorCode();
 
-        $this->assertEquals(Error::IP_INVALID, $result);
+        $this->assertEquals(ErrorCode::IP_INVALID, $result);
     }
 
     /**

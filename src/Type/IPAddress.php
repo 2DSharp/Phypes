@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Phypes\Type;
 
-use Phypes\Validator\Error;
+use Phypes\Validator\ErrorCode;
 use Phypes\Validator\IPAddressValidator;
 use Phypes\Validator\Validator;
 
