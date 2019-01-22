@@ -15,7 +15,7 @@ class Result
     private $valid;
     private $errors = [];
 
-    public function __construct(bool $valid, $errors = [])
+    public function __construct(bool $valid, Error... $errors)
     {
         $this->valid = $valid;
         $this->errors = $errors;
