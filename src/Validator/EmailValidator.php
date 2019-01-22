@@ -3,18 +3,23 @@ declare(strict_types=1);
 
 namespace Phypes\Validator;
 
+use Phypes\Error\TypeError\TypeError;
+use Phypes\Error\TypeError\TypeErrorCode;
+use Phypes\ErrorCode\Result;
+
 class EmailValidator extends AbstractValidator
 {
-    public function isValid($email, $options = []): bool
+    public function getResult($email, $options = []): Result
     {
         $this->validated = true;
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->error = $this->errorCode = null;
-            return true;
+
+            return $this->success();
         }
-        $this->errorCode = Error::EMAIL_INVALID;
-        $this->error = 'The provided email is invalid.';
-        return false;
+
+        $errors = array(new TypeError(TypeErrorCode::EMAIL_INVALID, 'The provided email is invalid.'));
+        return $this->failure($errors);
     }
+
 }
