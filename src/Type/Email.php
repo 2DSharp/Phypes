@@ -18,7 +18,6 @@ class Email implements Type
      * @param string $email
      * @param Validator $validator
      * @throws \InvalidArgumentException
-     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $email, Validator $validator = null)
     {
@@ -26,9 +25,11 @@ class Email implements Type
             // use the default validator
             $validator = new EmailValidator();
         }
+        $result = $validator->getResult($email);
 
-        if (!$validator->isValid($email)) {
-            throw new \InvalidArgumentException($validator->getErrorMessage(), $validator->getErrorCode());
+        if (!$result->isValid()) {
+            $error = $result->getFirstError();
+            throw new \InvalidArgumentException($error->getMessage(), $error->getCode());
         }
         $this->email = $email;
     }

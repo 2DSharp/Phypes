@@ -6,10 +6,10 @@
  * Time: 1:15 AM
  */
 
-namespace Phypes\Validator;
+namespace Phypes\Error\TypeError;
 
 
-abstract class Error
+abstract class TypeErrorCode
 {
     const PREMATURE_CALL_TO_METHOD  = 230000;
 
