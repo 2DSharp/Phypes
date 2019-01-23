@@ -4,13 +4,15 @@ declare(strict_types=1);
 namespace Phypes\UnitTest\Validator;
 
 use PHPUnit\Framework\TestCase;
-use Phypes\Exception\PrematureErrorCallException;
-use Phypes\Validator\ErrorCode;
+use Phypes\Error\TypeError\TypeErrorCode;
 use Phypes\Validator\IPAddressValidator;
 use Phypes\Validator\Validator;
 
 class IPAddressValidatorTest extends TestCase
 {
+    /**
+     * @var Validator $validator
+     */
     private $validator;
 
     public function setUp()
@@ -32,8 +34,8 @@ class IPAddressValidatorTest extends TestCase
      */
     public function testIsValidPass(string $ipAddress) : void
     {
-        $result = $this->validator->isValid($ipAddress);
-        $this->assertTrue($result);
+        $result = $this->validator->validate($ipAddress);
+        $this->assertTrue($result->isValid());
     }
 
     /**
@@ -45,8 +47,8 @@ class IPAddressValidatorTest extends TestCase
      */
     public function testIsValidFailure(string $ipAddress) : void
     {
-        $result = $this->validator->isValid($ipAddress);
-        $this->assertFalse($result);
+        $result = $this->validator->validate($ipAddress);
+        $this->assertFalse($result->isValid());
     }
 
     /**
@@ -54,10 +56,10 @@ class IPAddressValidatorTest extends TestCase
      */
     public function testErrorCodeOnFailure() : void
     {
-        $this->validator->isValid('123312');
-        $result = $this->validator->getErrorCode();
+        $result = $this->validator->validate('123312');
+        $code = $result->getFirstError()->getCode();
 
-        $this->assertEquals(ErrorCode::IP_INVALID, $result);
+        $this->assertEquals(TypeErrorCode::IP_INVALID, $code);
     }
 
     /**
@@ -65,13 +67,8 @@ class IPAddressValidatorTest extends TestCase
      */
     public function testErrorOnPass() : void
     {
-        $this->validator->isValid('192.168.0.0');
-
-        $code = $this->validator->getErrorCode();
-        $msg = $this->validator->getErrorMessage();
-
-        $this->assertNull($code);
-        $this->assertNull($msg);
+        $error = $this->validator->validate('192.168.0.0')->getFirstError();
+        $this->assertNull($error);
     }
 
     /**
@@ -83,15 +80,9 @@ class IPAddressValidatorTest extends TestCase
         $this->testErrorOnPass();
     }
 
-
     /**
      * Expect an exception to be thrown on calling getErrorMessage() before isValid()
      */
-    public function testExceptionOnPrematureErrorRetrieval() : void
-    {
-        $this->expectException(PrematureErrorCallException::class);
-        $this->validator->getErrorMessage();
-    }
 
     public function correctIpAddresses()
     {

@@ -19,7 +19,6 @@ class IPAddress implements Type
      * @param string $ip
      * @param Validator $validator
      * @throws \InvalidArgumentException
-     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $ip, Validator $validator = null)
     {
@@ -28,8 +27,10 @@ class IPAddress implements Type
             $validator = new IPAddressValidator();
         }
 
-        if (!$validator->isValid($ip)) {
-            throw new \InvalidArgumentException($validator->getErrorMessage(), $validator->getErrorCode());
+        $result = $validator->validate($ip);
+        if (!$result->isValid()) {
+            $error = $result->getFirstError();
+            throw new \InvalidArgumentException($error->getMessage(), $error->getCode());
         }
         $this->ip = $ip;
     }
