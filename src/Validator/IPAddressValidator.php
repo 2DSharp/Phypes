@@ -9,7 +9,6 @@ use Phypes\Result;
 
 class IPAddressValidator extends AbstractValidator
 {
-
     public function validate($type, $options = []): Result
     {
         if (filter_var($type, FILTER_VALIDATE_IP)) {

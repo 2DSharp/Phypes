@@ -11,8 +11,6 @@ class EmailValidator extends AbstractValidator
 {
     public function validate($email, $options = []): Result
     {
-        $this->validated = true;
-
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $this->success();
         }
