@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace Phypes\Validator;
 
+use Phypes\Error\TypeError\TypeError;
+use Phypes\Error\TypeError\TypeErrorCode;
+use Phypes\Result;
+use Phypes\Rule\String\MinimumLength;
+
 class PasswordValidator extends AbstractValidator
 {
     /**
@@ -44,7 +49,7 @@ class PasswordValidator extends AbstractValidator
      */
     private function isLongEnough(string $password, int $minSize) : bool
     {
-        return strlen($password) >= $minSize ;
+        return (new MinimumLength($minSize))->$this->validate($password)->isValid();
     }
 
     /**
@@ -53,26 +58,28 @@ class PasswordValidator extends AbstractValidator
      * This set of rules should work for a lot of general use cases
      * @param $password
      * @param array $options
-     * @return bool
+     * @return Result
      */
-    public function isValid($password, $options = []): bool
+    public function validate($password, $options = []): Result
     {
-        $this->validated = true;
 
         if (!$this->isLongEnough($password, 8)) {
-            $this->errorCode = ErrorCode::PASSWORD_TOO_SMALL;
-            $this->error = 'The password is not at least 8 characters long';
-            return false;
+
+            $error = new TypeError(TypeErrorCode::PASSWORD_TOO_SMALL,
+                'The password is not at least 8 characters long');
+
+            return $this->failure($error);
         }
 
         if (!$this->hasMultiCharTypes($password)) {
-            $this->errorCode = ErrorCode::PASSWORD_NOT_MULTI_CHARACTER;
-            $this->error = 'The password does not contain at least 3 of these character types:' .
-                ' lower case, upper case, numeric and special characters';
-            return false;
+
+            $error = new TypeError(TypeErrorCode::PASSWORD_NOT_MULTI_CHARACTER,
+                'The password does not contain at least 3 of these character types:' .
+                ' lower case, upper case, numeric and special characters');
+
+            return $this->failure($error);
         }
 
-        $this->error = $this->errorCode = null;
-        return true;
+        return $this->success();
     }
 }
