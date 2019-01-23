@@ -18,5 +18,4 @@ class EmailValidator extends AbstractValidator
         $error = new TypeError(TypeErrorCode::EMAIL_INVALID, 'The provided email is invalid.');
         return $this->failure($error);
     }
-
 }
