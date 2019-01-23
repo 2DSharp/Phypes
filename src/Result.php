@@ -31,11 +31,15 @@ class Result
      */
     public function getErrors(): array
     {
+
         return $this->errors;
     }
 
-    public function getFirstError() : Error
+    public function getFirstError() : ?Error
     {
-        return $this->errors[0];
+        if (!$this->valid) {
+            return $this->errors[0];
+        }
+        return null;
     }
 }

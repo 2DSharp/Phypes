@@ -6,12 +6,12 @@
  * Time: 1:53 AM
  */
 
-namespace Phypes\Rule;
-
+namespace Phypes\Rule\String;
 
 use Phypes\Error\RuleError\RuleError;
 use Phypes\Error\RuleError\RuleErrorCode;
 use Phypes\Result;
+use Phypes\Rule\Rule;
 
 class MinimumLength implements Rule
 {
@@ -24,7 +24,7 @@ class MinimumLength implements Rule
 
     public function validate($data) : Result
     {
-        if (mb_strlen($data, 'UTF-8') < $this->minLength) {
+        if (mb_strlen($data, 'UTF-8') >= $this->minLength) {
             return new Result(true);
         }
         else return new Result(false,
