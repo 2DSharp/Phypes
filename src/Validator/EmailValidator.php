@@ -6,11 +6,10 @@ namespace Phypes\Validator;
 use Phypes\Error\TypeError\TypeError;
 use Phypes\Error\TypeError\TypeErrorCode;
 use Phypes\Result;
-use Phypes\Rule\MinimumLength;
 
 class EmailValidator extends AbstractValidator
 {
-    public function getResult($email, $options = []): Result
+    public function validate($email, $options = []): Result
     {
         $this->validated = true;
 
@@ -18,8 +17,8 @@ class EmailValidator extends AbstractValidator
             return $this->success();
         }
 
-        $errors = new TypeError(TypeErrorCode::EMAIL_INVALID, 'The provided email is invalid.');
-        return $this->failure($errors);
+        $error = new TypeError(TypeErrorCode::EMAIL_INVALID, 'The provided email is invalid.');
+        return $this->failure($error);
     }
 
 }
