@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Phypes\UnitTest\Type;
 
+use Phypes\Error\Error;
+use Phypes\Result;
 use Phypes\Type\Email;
 use Phypes\Type\Type;
 use Phypes\Validator\Validator;
@@ -33,9 +35,15 @@ final class EmailTest extends TestCase
         $failingValue = 'john@12.';
 
         $validator = Mockery::mock(Validator::class);
-        $validator->allows()->isValid($failingValue)->andReturns(false);
-        $validator->allows()->getErrorMessage()->andReturns('The provided email is invalid.');
-        $validator->allows()->getErrorCode()->andReturns(111);
+        $result = Mockery::mock(Result::class);
+        $error = Mockery::mock(Error::class);
+
+        $validator->allows()->validate($failingValue)->andReturns($result);
+        $result->allows()->isValid()->andReturns(false);
+        $result->allows()->getFirstError()->andReturns($error);
+
+        $error->allows()->getMessage()->andReturns('The provided email is invalid.');
+        $error->allows()->getCode()->andReturns(111);
 
         $this->expectException(\InvalidArgumentException::class);
         new Email($failingValue, $validator);
@@ -45,12 +53,14 @@ final class EmailTest extends TestCase
      * Return a valid email address object passing validation on the mock.
      * @param string $validEmail
      * @return Email
-     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     private function getValidEmail(string $validEmail) : Email
     {
         $validator = Mockery::mock(Validator::class);
-        $validator->allows()->isValid($validEmail)->andReturns(true);
+        $result = Mockery::mock(Result::class);
+
+        $validator->allows()->validate($validEmail)->andReturns($result);
+        $result->allows()->isValid()->andReturns(true);
 
         $email = new Email($validEmail, $validator);
         return $email;

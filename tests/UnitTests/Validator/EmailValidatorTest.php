@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phypes\UnitTest\Validator;
 
 use Phypes\Error\TypeError\TypeErrorCode;
-use Phypes\Exception\PrematureErrorCallException;
 use PHPUnit\Framework\TestCase;
 use Phypes\Validator\EmailValidator;
 use Phypes\Validator\Validator;
