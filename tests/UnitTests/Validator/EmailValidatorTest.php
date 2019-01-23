@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Phypes\UnitTest\Validator;
 
+use Phypes\Error\TypeError\TypeErrorCode;
 use Phypes\Exception\PrematureErrorCallException;
 use PHPUnit\Framework\TestCase;
 use Phypes\Validator\EmailValidator;
-use Phypes\Validator\ErrorCode;
 use Phypes\Validator\Validator;
 
 class EmailValidatorTest extends TestCase
 {
+    /**
+     * @var Validator $validator
+     */
     private $validator;
 
     public function setUp()
@@ -29,7 +32,7 @@ class EmailValidatorTest extends TestCase
      */
     public function testIsValidPass() : void
     {
-        $result = $this->validator->isValid('2d@twodee.me');
+        $result = $this->validator->validate('2d@twodee.me')->isValid();
         $this->assertTrue($result);
     }
 
@@ -38,9 +41,10 @@ class EmailValidatorTest extends TestCase
      */
     public function testIsValidFailure() : void
     {
-        $result = $this->validator->isValid('12345lol@');
+        $result = $this->validator->validate('12345lol@')->isValid();
         $this->assertFalse($result);
-        $result = $this->validator->isValid('');
+
+        $result = $this->validator->validate('')->isValid();
         $this->assertFalse($result);
     }
 
@@ -49,49 +53,28 @@ class EmailValidatorTest extends TestCase
      */
     public function testErrorMessageReturned() : void
     {
-        $this->validator->isValid('invalid email');
-        $result = $this->validator->getErrorMessage();
+        $result = $this->validator->validate('invalid email');
+        $msg = $result->getFirstError()->getMessage();
 
-        $this->assertEquals('The provided email is invalid.', $result);
+        $this->assertEquals('The provided email is invalid.', $msg);
     }
 
     public function testErrorCodeReturned() : void
     {
-        $this->validator->isValid('invalid email');
-        $result = $this->validator->getErrorCode();
+        $result = $this->validator->validate('invalid email');
+        $code = $result->getFirstError()->getCode();
 
-        $this->assertEquals(ErrorCode::EMAIL_INVALID, $result);
+        $this->assertEquals(TypeErrorCode::EMAIL_INVALID, $code);
     }
 
     /**
-     * Make sure the error message is null on valid data
+     * Make sure the Error instance is null on valid data
      */
     public function testNoErrorOnValidEmail() : void
     {
-        $this->validator->isValid('2d@twodee.me');
-        $msg = $this->validator->getErrorMessage();
-        $code = $this->validator->getErrorCode();
+        $error = $this->validator->validate('2d@twodee.me')->getFirstError();
 
-        $this->assertNull($msg);
-        $this->assertNull($code);
-
+        $this->assertNull($error);
     }
 
-    /**
-     * Return the error state to empty on successful validation
-     */
-    public function testWithMultipleValidations() : void
-    {
-        $this->testErrorMessageReturned();
-        $this->testNoErrorOnValidEmail();
-    }
-
-    /**
-     * Expect an exception to be thrown on calling getErrorMessage() before isValid()
-     */
-    public function testExceptionOnPrematureErrorRetrieval() : void
-    {
-        $this->expectException(PrematureErrorCallException::class);
-        $this->validator->getErrorMessage();
-    }
 }
