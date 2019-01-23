@@ -14,9 +14,7 @@ class EmailValidator extends AbstractValidator
     {
         $this->validated = true;
 
-        $result = (new MinimumLength(4))->validate($email);
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) && $result->isValid()) {
-
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $this->success();
         }
 
