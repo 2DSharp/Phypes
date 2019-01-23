@@ -25,7 +25,7 @@ class Email implements Type
             // use the default validator
             $validator = new EmailValidator();
         }
-        $result = $validator->getResult($email);
+        $result = $validator->validate($email);
 
         if (!$result->isValid()) {
             $error = $result->getFirstError();
