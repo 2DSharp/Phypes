@@ -17,8 +17,6 @@ use Phypes\Rule\String\MinimumLength;
 
 class MinimumLengthTest extends TestCase
 {
-
-
     /**
      * Test if the rule implements the Rule interface
      */
@@ -40,12 +38,19 @@ class MinimumLengthTest extends TestCase
         $failureResult = $rule->validate('Small');
         $this->assertInstanceOf(Result::class, $failureResult);
     }
+
+    /**
+     * Check validation status on failure
+     */
     public function testValidateFailureBoolean() : void
     {
         $result = $this->getFailedResult();
         $this->assertFalse($result->isValid()) ;
     }
 
+    /**
+     * Return error on failure
+     */
     public function testValidateFailureErrorInstance() : void
     {
         $result = $this->getFailedResult();
@@ -99,6 +104,7 @@ class MinimumLengthTest extends TestCase
 
         $this->assertNull($result->getFirstError()) ;
     }
+
     private function getFailedResult() : Result
     {
         $text = "Hello";
