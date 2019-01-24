@@ -18,7 +18,6 @@ class Password implements Type
      * @param string $password
      * @param Validator $validator
      * @throws \InvalidArgumentException
-     * @throws \Phypes\Exception\PrematureErrorCallException
      */
     public function __construct(string $password, Validator $validator = null)
     {
@@ -27,8 +26,11 @@ class Password implements Type
             $validator = new PasswordValidator();
         }
 
-        if (!$validator->isValid($password)) {
-            throw new \InvalidArgumentException($validator->getErrorMessage(), $validator->getErrorCode());
+        $result = $validator->validate($password);
+
+        if (!$result->isValid()) {
+            $error = $result->getFirstError();
+            throw new \InvalidArgumentException($error->getMessage(), $error->getCode());
         }
         $this->password = $password;
     }

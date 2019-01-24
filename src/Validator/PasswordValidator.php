@@ -49,7 +49,7 @@ class PasswordValidator extends AbstractValidator
      */
     private function isLongEnough(string $password, int $minSize) : bool
     {
-        return (new MinimumLength($minSize))->$this->validate($password)->isValid();
+        return (new MinimumLength($minSize))->validate($password)->isValid();
     }
 
     /**
