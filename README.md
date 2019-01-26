@@ -7,14 +7,21 @@ A Value Objects library with type validation for PHP.
 Phypes is a fully extensible value objects library with commonly used types that allows for
 user input validation and data storage.
 
-Phypes has 2 main components:
+Phypes has 3 components:
 - **Types**
 - **Validators**
+- **Rules**
 
 A type is an immutable object created from user input and passed on to the services in the 
 business layer to store/manipulate/use the data.
+
 A validator checks the input of each type and throws an `InvalidArgumentException` upon
 validation failure along with the error message and code describing the error.
+
+A validator is further assisted using "Rules". Rules are helper classes which do validation
+at an atomic level. Raw data with very simple specifications are processed and validated, for 
+example: You might want to check if the length of a supplied string is more than your limit.
+A combination of rules define a validator.
 
 A standard set of data types with validators have been provided in the library. For custom 
 validation, user-defined validators can easily be supplied as an argument to the Type.
@@ -78,7 +85,10 @@ try {
 }
 ```
 
-Or maybe inject your own validator.
+If you do not like our validator implementations, you don't have to use them!
+You can plug in your own validators with custom rules, and Phypes will do the rest
+for you.
+
 There are two ways to specify a validator.
 
 Either by implementing the `Validator` interface and putting in the custom validation rules:
@@ -100,33 +110,23 @@ class CustomPasswordValidator implements Validator
     
     private function isLongEnough(string $password) : bool
     {
-        return strlen($password) >= 10 ;
+        return (new MinimumLength($minSize))->validate($password)->isValid();
     }
-    public function isValid($password, $options = []): bool
+    public function validate($password, $options = []): Result
     {
         $this->validated = true;
 
         if (!$this->isLongEnough($password)) {
-            $this->errorCode = Error::PASSWORD_TOO_SMALL;
-            $this->error = 'The password is not at least 8 characters long';
-            return false;
+            $error = new TypeError(TypeErrorCode::PASSWORD_TOO_SMALL,
+                'The password is not at least 8 characters long');
+
+            return new Result(false, $error);
         }
-    }
-    
-    public function getErrorMessage() : ?string
-    {
-      return $this->error;
-    }
-    
-    public function getErrorCode() : ?int
-    {
-      return $this->errorCode;
     }
   }
   ```
 
-Or by extending the `AbstractValidator`, which requires the `validated` protected 
-variable to be set on calling is valid to disallow calling `getMessage()` without validating first:
+Or by extending the `AbstractValidator`, which allows you to use the `failure()` and `success()` methods:
 
 **CustomPasswordValidator.php**
 ```php
@@ -143,26 +143,24 @@ class CustomPasswordValidator extends AbstractValidator
 {
     private function isLongEnough(string $password) : bool
     {
-        return strlen($password) >= 10 ;
+        return (new MinimumLength($minSize))->validate($password)->isValid();
     }
-    public function isValid($password, $options = []): bool
+    public function validate($password, $options = []): Result
     {
-        $this->validated = true;
-
-        if (!$this->isLongEnough($password)) {
-            $this->errorCode = Error::PASSWORD_TOO_SMALL;
-            $this->error = 'The password is not at least 8 characters long';
-            return false;
-        }
-
-        $this->error = $this->errorCode = null;
-        return true;
+        $error = new TypeError(TypeErrorCode::PASSWORD_TOO_SMALL,
+                'The password is not at least 8 characters long');
+        return $this->failure($error);
     }
   }
   ```
-  which doesn't require an implementation of `getErrorMessage()` which is already done in the parent class.
-  
-  And then simply switch in the custom validator in the type.
+
+A validator and a rule always return a **Result** after validation.
+You can find out if it has been successful or not using `Result::isValid()`.
+
+If the validation failed, you can grab the errors using `Result::getErrors()`
+or `Result::getFirstError()`.
+
+And then simply switch in the custom validator in the type.
   ```php
   $pass = new Password($_POST['password'], new CustomPasswordValidator());
   ```
@@ -172,6 +170,6 @@ class CustomPasswordValidator extends AbstractValidator
   standard validators have already been provided with the library which will suffice for a lot of use cases.
   
   
-A list of error standard codes can be found in the `Error` abstract class. They can be used to determine the
+A list of error standard codes can be found in the `TypeErrorCode` and `RuleErrorCode` abstract classes. They can be used to determine the
 kind of errors returned during the validation and the application can spit out custom validation errors without
 having to rely on the generic error messages defined in the library.
