@@ -9,7 +9,7 @@
 namespace Phypes\UnitTest\Rule\String;
 
 use Phypes\Error\Error;
-use Phypes\Error\RuleError\RuleErrorCode;
+use Phypes\Error\RuleErrorCode;
 use Phypes\Result;
 use Phypes\Rule\Rule;
 use Phypes\Rule\String\MaximumLength;

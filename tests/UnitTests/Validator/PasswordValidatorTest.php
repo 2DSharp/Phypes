@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Phypes\UnitTest\Validator;
 
 use PHPUnit\Framework\TestCase;
-use Phypes\Error\TypeError\TypeErrorCode;
+use Phypes\Error\TypeErrorCode;
 use Phypes\Validator\PasswordValidator;
 use Phypes\Validator\Validator;
 

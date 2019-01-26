@@ -6,11 +6,9 @@
  * Time: 2:53 AM
  */
 
-namespace Phypes\Error\RuleError;
+namespace Phypes\Error;
 
-use Phypes\Error\Error;
-
-class RuleError implements Error
+class TypeError implements Error
 {
     private $code;
     private $message;

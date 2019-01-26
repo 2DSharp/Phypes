@@ -6,7 +6,7 @@
  * Time: 1:15 AM
  */
 
-namespace Phypes\Error\TypeError;
+namespace Phypes\Error;
 
 
 abstract class TypeErrorCode

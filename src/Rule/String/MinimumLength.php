@@ -8,8 +8,8 @@
 
 namespace Phypes\Rule\String;
 
-use Phypes\Error\RuleError\RuleError;
-use Phypes\Error\RuleError\RuleErrorCode;
+use Phypes\Error\RuleError;
+use Phypes\Error\RuleErrorCode;
 use Phypes\Result;
 use Phypes\Rule\Rule;
 

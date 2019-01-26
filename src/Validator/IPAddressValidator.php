@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Phypes\Validator;
 
-use Phypes\Error\TypeError\TypeError;
-use Phypes\Error\TypeError\TypeErrorCode;
+use Phypes\Error\TypeError;
+use Phypes\Error\TypeErrorCode;
 use Phypes\Result;
 
 class IPAddressValidator extends AbstractValidator

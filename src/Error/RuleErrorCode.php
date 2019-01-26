@@ -6,7 +6,7 @@
  * Time: 2:32 AM
  */
 
-namespace Phypes\Error\RuleError;
+namespace Phypes\Error;
 
 
 abstract class RuleErrorCode
