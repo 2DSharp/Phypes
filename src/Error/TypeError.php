@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dedipyaman
- * Date: 1/23/19
- * Time: 2:53 AM
- */
 
 namespace Phypes\Error;
 
