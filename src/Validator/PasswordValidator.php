@@ -4,10 +4,12 @@ namespace Phypes\Validator;
 
 use Phypes\Error\TypeError;
 use Phypes\Error\TypeErrorCode;
-use Phypes\Result;
+use Phypes\Result\Failure;
+use Phypes\Result\Result;
+use Phypes\Result\Success;
 use Phypes\Rule\String\MinimumLength;
 
-class PasswordValidator extends AbstractValidator
+class PasswordValidator implements Validator
 {
     /**
      * Check if the password has a diverse character type set for a strong-enough password
@@ -67,7 +69,7 @@ class PasswordValidator extends AbstractValidator
             $error = new TypeError(TypeErrorCode::PASSWORD_TOO_SMALL,
                 'The password is not at least 8 characters long');
 
-            return $this->failure($error);
+            return new Failure($error);
         }
 
         if (!$this->hasMultiCharTypes($password)) {
@@ -76,9 +78,9 @@ class PasswordValidator extends AbstractValidator
                 'The password does not contain at least 3 of these character types:' .
                 ' lower case, upper case, numeric and special characters');
 
-            return $this->failure($error);
+            return new Failure($error);
         }
 
-        return $this->success();
+        return new Success();
     }
 }
