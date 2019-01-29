@@ -15,7 +15,7 @@ namespace Phypes\Result;
  * Class Success
  *
  * Specialized result class for successful outcomes
- * @package Phypes\Result
+ * @package Phypes\AbstractResult
  * @author Dedipyaman Das <2d@twodee.me>
  */
 class Success extends Result

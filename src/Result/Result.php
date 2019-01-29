@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Phypes;
+namespace Phypes\Result;
 
 use Phypes\Error\Error;
 
-class Result
+abstract class Result
 {
     private $valid;
     private $errors = [];
@@ -25,7 +25,6 @@ class Result
      */
     public function getErrors(): array
     {
-
         return $this->errors;
     }
 

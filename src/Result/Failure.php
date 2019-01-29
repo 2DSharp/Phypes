@@ -17,13 +17,13 @@ use Phypes\Error\Error;
  * Class Failure
  *
  * Specialized result class for failed cases
- * @package Phypes\Result
+ * @package Phypes\AbstractResult
  * @author Dedipyaman Das <2d@twodee.me>
  */
 class Failure extends Result
 {
-    public function __construct(Error... $errors)
+    public function __construct(Error ...$errors)
     {
-        parent::__construct(false, $errors);
+        parent::__construct(false, ...$errors);
     }
 }

@@ -20,7 +20,7 @@ class MaximumLengthTest extends TestCase
     }
 
     /**
-     * Calling validate should return a Result value object
+     * Calling validate should return a AbstractResult value object
      */
     public function testValidateReturnsResult() : void
     {
