@@ -5,7 +5,7 @@ namespace Phypes\UnitTest\Rule\String;
 use PHPUnit\Framework\TestCase;
 use Phypes\Error\Error;
 use Phypes\Error\RuleErrorCode;
-use Phypes\Result;
+use Phypes\Result\Result;
 use Phypes\Rule\Rule;
 use Phypes\Rule\String\MinimumLength;
 
@@ -20,7 +20,7 @@ class MinimumLengthTest extends TestCase
     }
 
     /**
-     * Calling validate should return a Result value object
+     * Calling validate should return a AbstractResult value object
      */
     public function testValidateReturnsResult() : void
     {

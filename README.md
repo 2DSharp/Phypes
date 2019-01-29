@@ -89,9 +89,7 @@ If you do not like our validator implementations, you don't have to use them!
 You can plug in your own validators with custom rules, and Phypes will do the rest
 for you.
 
-There are two ways to specify a validator.
-
-Either by implementing the `Validator` interface and putting in the custom validation rules:
+To inject a custom validator, implement the `Validator` interface:
 
 **CustomPasswordValidator.php**
 ```php
@@ -101,58 +99,31 @@ declare(strict_types=1);
 namespace Sample\Foo;
 
 use Phypes\Validator\Validator;
-use Phypes\Validator\Error;
+use Phypes\Error\TypeError;
+use Phypes\Error\TypeErrorCode;
+use Phypes\Rule\String\MinimumLength;
+use Phypes\Result;
 
 class CustomPasswordValidator implements Validator
 {
-    private $error;
-    private $errorCode;
-    
     private function isLongEnough(string $password) : bool
     {
-        return (new MinimumLength($minSize))->validate($password)->isValid();
+        return (new MinimumLength(8))->validate($password)->isValid();
     }
-    public function validate($password, $options = []): Result
+    public function validate($password, $options = []): Result\Result
     {
-        $this->validated = true;
-
         if (!$this->isLongEnough($password)) {
             $error = new TypeError(TypeErrorCode::PASSWORD_TOO_SMALL,
                 'The password is not at least 8 characters long');
 
-            return new Result(false, $error);
+            return new Result\Failure($error);
         }
+        
+        return new Result\Success();
     }
   }
   ```
 
-Or by extending the `AbstractValidator`, which allows you to use the `failure()` and `success()` methods:
-
-**CustomPasswordValidator.php**
-```php
-<?php
-declare(strict_types=1);
-
-namespace Sample\Foo;
-
-
-use Phypes\Validator\AbstractValidator;
-use Phypes\Validator\Error;
-
-class CustomPasswordValidator extends AbstractValidator
-{
-    private function isLongEnough(string $password) : bool
-    {
-        return (new MinimumLength($minSize))->validate($password)->isValid();
-    }
-    public function validate($password, $options = []): Result
-    {
-        $error = new TypeError(TypeErrorCode::PASSWORD_TOO_SMALL,
-                'The password is not at least 8 characters long');
-        return $this->failure($error);
-    }
-  }
-  ```
 
 A validator and a rule always return a **Result** after validation.
 You can find out if it has been successful or not using `Result::isValid()`.

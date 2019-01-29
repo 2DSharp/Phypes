@@ -2,7 +2,7 @@
 
 namespace Phypes\Validator;
 
-use Phypes\Result;
+use Phypes\Result\Result;
 
 interface Validator
 {
