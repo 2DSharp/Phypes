@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: dedipyaman
- * Date: 1/25/19
- * Time: 3:51 PM
- */
+<?php declare(strict_types=1);
 
 namespace Phypes\UnitTest\Rule\String;
 

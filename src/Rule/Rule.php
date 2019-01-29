@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: dedipyaman
- * Date: 1/21/19
- * Time: 12:48 PM
- */
+<?php declare(strict_types=1);
 
 namespace Phypes\Rule;
 use Phypes\Result;
