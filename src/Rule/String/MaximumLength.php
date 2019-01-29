@@ -5,7 +5,9 @@ namespace Phypes\Rule\String;
 
 use Phypes\Error\RuleError;
 use Phypes\Error\RuleErrorCode;
-use Phypes\Result;
+use Phypes\Result\Failure;
+use Phypes\Result\Result;
+use Phypes\Result\Success;
 use Phypes\Rule\Rule;
 
 class MaximumLength implements Rule
@@ -19,9 +21,9 @@ class MaximumLength implements Rule
     public function validate($data) : Result
     {
         if (mb_strlen($data, 'UTF-8') <= $this->maxLength) {
-            return new Result(true);
+            return new Success();
         }
-        else return new Result(false,
+        else return new Failure(
             new RuleError(RuleErrorCode::TOO_LONG,
                 'The supplied string is too long'));
     }

@@ -5,7 +5,7 @@ namespace Phypes\UnitTest\Rule\String;
 use PHPUnit\Framework\TestCase;
 use Phypes\Error\Error;
 use Phypes\Error\RuleErrorCode;
-use Phypes\Result;
+use Phypes\Result\Result;
 use Phypes\Rule\Rule;
 use Phypes\Rule\String\MinimumLength;
 

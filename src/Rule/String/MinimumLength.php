@@ -16,12 +16,12 @@ class MinimumLength implements Rule
         $this->minLength = $minLength;
     }
 
-    public function validate($data) : Result
+    public function validate($data) : Result\Result
     {
         if (mb_strlen($data, 'UTF-8') >= $this->minLength) {
-            return new Result(true);
+            return new Result\Success();
         }
-        else return new Result(false,
+        else return new Result\Failure(
             new RuleError(RuleErrorCode::TOO_SHORT,
             'The supplied string is too short'));
     }

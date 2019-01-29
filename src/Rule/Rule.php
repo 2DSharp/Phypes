@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Phypes\Rule;
-use Phypes\Result;
+use Phypes\Result\Result;
 
 interface Rule
 {
