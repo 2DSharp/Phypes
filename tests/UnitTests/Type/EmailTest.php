@@ -3,7 +3,7 @@
 namespace Phypes\UnitTest\Type;
 
 use Phypes\Error\Error;
-use Phypes\Result;
+use Phypes\Result\Result;
 use Phypes\Type\Email;
 use Phypes\Type\Type;
 use Phypes\Validator\Validator;
