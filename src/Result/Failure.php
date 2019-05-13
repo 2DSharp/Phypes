@@ -26,4 +26,17 @@ class Failure extends Result
     {
         parent::__construct(false, ...$errors);
     }
+    /**
+     * @return array
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
+    public function getFirstError() : Error
+    {
+        return $this->errors[0];
+
+    }
 }

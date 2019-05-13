@@ -4,6 +4,7 @@ namespace Phypes\UnitTest\Validator;
 
 use PHPUnit\Framework\TestCase;
 use Phypes\Error\TypeErrorCode;
+use Phypes\Result\Success;
 use Phypes\Validator\PasswordValidator;
 use Phypes\Validator\Validator;
 
@@ -147,13 +148,13 @@ class PasswordValidatorTest extends TestCase
         $this->assertEquals($expectation, $code);
     }
     /**
-     * Expecting a null message on no error validation
+     * Expecting an instance of Success::class on success
      */
     public function testValidPasswordErrorOutput() : void
     {
-        $error = $this->validator->validate('easypasswordA!')->getFirstError();
+        $result = $this->validator->validate('easypasswordA!');
 
-        $this->assertNull($error);
+        $this->assertInstanceOf(Success::class, $result);
     }
 
     public function testMultipleValidationError() : void

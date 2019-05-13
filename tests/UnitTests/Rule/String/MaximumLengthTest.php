@@ -5,6 +5,7 @@ namespace Phypes\UnitTest\Rule\String;
 use Phypes\Error\Error;
 use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Result;
+use Phypes\Result\Success;
 use Phypes\Rule\Rule;
 use Phypes\Rule\String\MaximumLength;
 use PHPUnit\Framework\TestCase;
@@ -87,16 +88,13 @@ class MaximumLengthTest extends TestCase
         $this->assertTrue($result->isValid());
     }
 
-    /**
-     * Success shouldn't return an Error instance
-     */
     public function testValidateSuccessError()
     {
         $text = 'Player';
         $rule = new MaximumLength(7);
         $result = $rule->validate($text);
 
-        $this->assertNull($result->getFirstError()) ;
+        $this->assertInstanceOf(Success::class, $result);
     }
 
     private function getFailedResult() : Result

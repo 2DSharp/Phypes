@@ -4,6 +4,7 @@ namespace Phypes\UnitTest\Validator;
 
 use PHPUnit\Framework\TestCase;
 use Phypes\Error\TypeErrorCode;
+use Phypes\Result\Success;
 use Phypes\Validator\IPAddressValidator;
 use Phypes\Validator\Validator;
 
@@ -66,8 +67,8 @@ class IPAddressValidatorTest extends TestCase
      */
     public function testErrorOnPass() : void
     {
-        $error = $this->validator->validate('192.168.0.0')->getFirstError();
-        $this->assertNull($error);
+        $result = $this->validator->validate('192.168.0.0');
+        $this->assertInstanceOf(Success::class, $result);
     }
 
     /**
