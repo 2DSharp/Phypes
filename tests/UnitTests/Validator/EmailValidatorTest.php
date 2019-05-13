@@ -4,6 +4,7 @@ namespace Phypes\UnitTest\Validator;
 
 use Phypes\Error\TypeErrorCode;
 use PHPUnit\Framework\TestCase;
+use Phypes\Result\Success;
 use Phypes\Validator\EmailValidator;
 use Phypes\Validator\Validator;
 
@@ -69,9 +70,9 @@ class EmailValidatorTest extends TestCase
      */
     public function testNoErrorOnValidEmail() : void
     {
-        $error = $this->validator->validate('2d@twodee.me')->getFirstError();
+        $result = $this->validator->validate('2d@twodee.me');
 
-        $this->assertNull($error);
+        self::assertInstanceOf(Success::class, $result);
     }
 
 }

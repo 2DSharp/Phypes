@@ -7,7 +7,7 @@ use Phypes\Error\Error;
 abstract class Result
 {
     private $valid;
-    private $errors = [];
+    protected $errors = [];
 
     public function __construct(bool $valid, Error... $errors)
     {
@@ -18,21 +18,5 @@ abstract class Result
     public function isValid() : bool
     {
         return $this->valid;
-    }
-
-    /**
-     * @return array
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
-
-    public function getFirstError() : ?Error
-    {
-        if (!$this->valid) {
-            return $this->errors[0];
-        }
-        return null;
     }
 }

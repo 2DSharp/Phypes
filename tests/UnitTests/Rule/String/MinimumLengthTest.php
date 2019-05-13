@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Phypes\Error\Error;
 use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Result;
+use Phypes\Result\Success;
 use Phypes\Rule\Rule;
 use Phypes\Rule\String\MinimumLength;
 
@@ -96,7 +97,7 @@ class MinimumLengthTest extends TestCase
         $rule = new MinimumLength(5);
         $result = $rule->validate($text);
 
-        $this->assertNull($result->getFirstError()) ;
+        $this->assertInstanceOf(Success::class, $result) ;
     }
 
     private function getFailedResult() : Result
