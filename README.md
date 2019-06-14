@@ -89,6 +89,13 @@ If you do not like our validator implementations, you don't have to use them!
 You can plug in your own validators with custom rules, and Phypes will do the rest
 for you.
 
+With that said, you need to be extra careful to not inject an irrelevant validator 
+to a type. A password validator to an email type would never make sense. It would 
+in fact change the entire meaning of the email type. 
+
+As a rule of thumb, use the bundled types and validators as long as you don't _really_ 
+need to make a custom validator for a given type.
+
 To inject a custom validator, implement the `Validator` interface:
 
 **CustomPasswordValidator.php**
