@@ -2,7 +2,6 @@
 
 namespace Phypes\Rule\String;
 
-
 use Phypes\Error\RuleError;
 use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Failure;

@@ -14,9 +14,9 @@ class IPAddressValidator implements Validator
     public function validate($type, $options = []): Result
     {
         if (filter_var($type, FILTER_VALIDATE_IP)) {
-
             return new Success();
         }
+
         $errors = new TypeError(TypeErrorCode::IP_INVALID, 'The provided IP address is invalid');
         return new Failure($errors);
     }
