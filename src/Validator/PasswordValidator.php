@@ -65,7 +65,7 @@ class PasswordValidator implements Validator
      * @param array $options
      * @return Result
      */
-    public function validate($password, $options = []): Result
+    public function validate($password): Result
     {
 
         if (!$this->isLongEnough($password, 8)) {

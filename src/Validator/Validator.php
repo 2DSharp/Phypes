@@ -6,5 +6,5 @@ use Phypes\Result\Result;
 
 interface Validator
 {
-    public function validate($type, $options = []) : Result;
+    public function validate($type) : Result;
 }

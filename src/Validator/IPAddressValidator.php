@@ -11,7 +11,7 @@ use Phypes\Result\Success;
 
 class IPAddressValidator implements Validator
 {
-    public function validate($type, $options = []): Result
+    public function validate($type): Result
     {
         if (filter_var($type, FILTER_VALIDATE_IP)) {
             return new Success();

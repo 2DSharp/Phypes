@@ -10,7 +10,7 @@ use Phypes\Result\Success;
 
 class EmailValidator implements Validator
 {
-    public function validate($email, $options = []): Result
+    public function validate($email): Result
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return new Success();
