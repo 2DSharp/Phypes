@@ -8,6 +8,7 @@ use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
 use Phypes\Rule\String\MinimumLength;
+use Phypes\Rule\String\TextCase;
 
 class PasswordValidator implements Validator
 {
@@ -20,13 +21,16 @@ class PasswordValidator implements Validator
     private function hasMultiCharTypes(string $password): bool
     {
         $differentCharacterTypes = 0;
-        // Lowercase
-        if (preg_match('/[a-z]/', $password)) {
+
+        $rule = new TextCase(TextCase::SOME_LOWER);
+
+        if ($rule->validate($password)->isValid()) {
             $differentCharacterTypes++;
         }
 
-        // Upper case
-        if (preg_match('/[A-Z]/', $password)) {
+        $rule = new TextCase(TextCase::SOME_UPPER);
+
+        if ($rule->validate($password)->isValid()) {
             $differentCharacterTypes++;
         }
 
