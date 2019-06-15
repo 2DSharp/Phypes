@@ -18,24 +18,9 @@ use Phypes\Result\Result;
 use Phypes\Result\Success;
 use Phypes\Rule\Rule;
 
-class AlphaNumeric implements Rule
+class AlphaNumeric extends StringTypes implements Rule
 {
     // TODO: Add AlphaNumeric test
-    /**
-     * Special characters excused within the alphanum value
-     * Handy for username validations
-     * @var array $allowedSpecialChars
-     */
-    private $allowedSpecialChars;
-
-    /**
-     * AlphaNumeric constructor.
-     * @param array $allowedSpecialChars
-     */
-    public function __construct($allowedSpecialChars = [])
-    {
-        $this->allowedSpecialChars = $allowedSpecialChars;
-    }
 
     public function validate($data): Result
     {
