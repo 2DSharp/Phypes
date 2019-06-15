@@ -19,10 +19,12 @@ use Phypes\Rule\Rule;
 
 class TextCase implements Rule
 {
-    const NONE_CAPS = 0;
-    const ALL_CAPS = 1;
+    const ALL_LOWER = 0;
+    const ALL_UPPER = 1;
     const MIXED = 2;
-
+    const SOME_UPPER = 3;
+    const SOME_LOWER = 4;
+    
     const LEVEL_STRICT = 0;
     const LEVEL_TOLERANT = 1;
     /**
@@ -38,16 +40,16 @@ class TextCase implements Rule
      * TextCase constructor.
      * @throws \InvalidArgumentException
      * @param int $caseType
-     * @param bool $strictCheck
+     * @param bool $allowSpecialChars
      */
-    public function __construct(int $caseType, bool $strictCheck = false)
+    public function __construct(int $caseType, bool $allowSpecialChars = true)
     {
-        if ($caseType > 2 || $caseType < 0)
+        if ($caseType > 4 || $caseType < 0)
             throw new \InvalidArgumentException('Case Type ' . $caseType . ' is invalid. 
             Check the class constants available to be used as caseTypes');
 
         $this->caseType = $caseType;
-        $this->strictCheck = $strictCheck;
+        $this->strictCheck = !$allowSpecialChars;
     }
 
     /**
@@ -66,7 +68,7 @@ class TextCase implements Rule
         return preg_match('/[a-z]/', $text) && preg_match('/[A-Z]/', $text);
     }
 
-    private function isAllCaps(string $text) : bool
+    private function isAllUpper(string $text) : bool
     {
         if ($this->strictCheck)
             return ctype_upper($text);
@@ -75,12 +77,32 @@ class TextCase implements Rule
             
     }
 
-    private function isNoneCaps(string $text) : bool
+    private function isAllLower(string $text) : bool
     {
         if ($this->strictCheck)
             return ctype_lower($text);
         else
             return preg_match('/[a-z]/', $text) && !preg_match('/[A-Z]/', $text);
+    }
+
+    private function isSomeLower(string $text) : bool
+    {
+        $containsLower = preg_match('/[a-z]/', $text);
+
+        if ($this->strictCheck)
+           return !preg_match('/[\W]/', $text) && $containsLower;
+        else
+            return $containsLower;
+    }
+
+    private function isSomeUpper(string $text) : bool
+    {
+        $containsUpper = preg_match('/[A-Z]/', $text);
+
+        if ($this->strictCheck)
+            return !preg_match('/[\W]/', $text) && $containsUpper;
+        else
+            return $containsUpper;
     }
 
     public function validate($data): Result
@@ -91,12 +113,17 @@ class TextCase implements Rule
             case self::MIXED:
                 $isValid = $this->isMixed($data);
                 break;
-            case self::ALL_CAPS:
-                $isValid = $this->isAllCaps($data);
+            case self::ALL_UPPER:
+                $isValid = $this->isAllUpper($data);
                 break;
-
-            case self::NONE_CAPS:
-                $isValid = $this->isNoneCaps($data);
+            case self::ALL_LOWER:
+                $isValid = $this->isAllLower($data);
+                break;
+            case self::SOME_LOWER:
+                $isValid = $this->isSomeLower($data);
+                break;
+            case self::SOME_UPPER:
+                $isValid = $this->isSomeUpper($data);
                 break;
         }
 
