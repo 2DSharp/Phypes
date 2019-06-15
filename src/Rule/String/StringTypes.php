@@ -19,7 +19,7 @@ abstract class StringTypes
      * Handy for username validations
      * @var array $allowedSpecialChars
      */
-    protected $allowedSpecialChars;
+    protected $allowedSpecialChars = [];
 
     /**
      * AlphaNumeric constructor.
