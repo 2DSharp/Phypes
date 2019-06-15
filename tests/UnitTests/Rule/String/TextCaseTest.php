@@ -60,7 +60,7 @@ class TextCaseTest extends TestCase
 
     public function testAllCapsSuccess() : void
     {
-        $rule = new TextCase(TextCase::ALL_CAPS);
+        $rule = new TextCase(TextCase::ALL_UPPER);
         $result = $rule->validate('ALLCAPS');
         $this->assertTrue($result->isValid());
         $this->assertInstanceOf(Success::class, $result);
@@ -68,7 +68,7 @@ class TextCaseTest extends TestCase
 
     public function testNoneCapsSuccess() : void
     {
-        $rule = new TextCase(TextCase::NONE_CAPS);
+        $rule = new TextCase(TextCase::ALL_LOWER);
         $result = $rule->validate('nonecaps');
         $this->assertTrue($result->isValid());
         $this->assertInstanceOf(Success::class, $result);
@@ -85,14 +85,14 @@ class TextCaseTest extends TestCase
     }
     public function testAllCapsFailureBoolean() : void
     {
-        $rule = new TextCase(TextCase::ALL_CAPS);
+        $rule = new TextCase(TextCase::ALL_UPPER);
         $result = $rule->validate('MixedCase');
         $this->assertFalse($result->isValid());
     }
 
     public function testNoneCapsFailureBoolean() : void
     {
-        $rule = new TextCase(TextCase::NONE_CAPS);
+        $rule = new TextCase(TextCase::ALL_LOWER);
         $result = $rule->validate('MixedCase');
         $this->assertFalse($result->isValid());
     }
@@ -115,11 +115,11 @@ class TextCaseTest extends TestCase
         $result = $rule->validate('');
         $this->assertFalse($result->isValid());
 
-        $rule = new TextCase(TextCase::ALL_CAPS);
+        $rule = new TextCase(TextCase::ALL_UPPER);
         $result = $rule->validate('');
         $this->assertFalse($result->isValid());
 
-        $rule = new TextCase(TextCase::NONE_CAPS);
+        $rule = new TextCase(TextCase::ALL_LOWER);
         $result = $rule->validate('');
         $this->assertFalse($result->isValid());
     }
@@ -159,7 +159,7 @@ class TextCaseTest extends TestCase
      */
     public function testAllCapsOtherCharsFailure(string $wrongValues) : void
     {
-        $rule = new TextCase(TextCase::ALL_CAPS);
+        $rule = new TextCase(TextCase::ALL_UPPER);
 
         $result = $rule->validate($wrongValues);
         $this->assertFalse($result->isValid());
@@ -171,7 +171,7 @@ class TextCaseTest extends TestCase
      */
     public function testNoneCapsOtherCharsFailure(string $wrongValues) : void
     {
-        $rule = new TextCase(TextCase::NONE_CAPS);
+        $rule = new TextCase(TextCase::ALL_LOWER);
 
         $result = $rule->validate($wrongValues);
         $this->assertFalse($result->isValid());
