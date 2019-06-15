@@ -12,6 +12,7 @@
 namespace Phypes\Rule\Aggregate;
 
 
+use Phypes\Error\Error;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
@@ -44,14 +45,21 @@ class ForAll implements Rule
             if (!$result->isValid()) {
                 /**
                  * @var Failure $result
+                 * @var Error $errors[]
+                 * @var Error $error
                  */
-                $errors[] = $result->getErrors();
+                foreach ($result->getErrors() as $error) {
+                    $errors[] = $error;
+                }
             }
 
-            if (empty($errors))
-                return new Success();
-            else
-                return new Failure($errors);
+        }
+
+        if (empty($errors))
+            return new Success();
+        else {
+            return new Failure(...$errors); // Use the splat operator
+
         }
     }
 }
