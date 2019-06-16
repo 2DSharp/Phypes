@@ -15,6 +15,25 @@ use Phypes\Rule\String\MinimumLength;
 class PasswordValidator implements Validator
 {
     /**
+     * @var int $minLength
+     */
+    private $minLength;
+    /**
+     * @var int $minCharStrength
+     */
+    private $minCharStrength;
+
+    /**
+     * PasswordValidator constructor.
+     * @param int $minLength
+     * @param int $minCharStrength Minimum variety in characters
+     */
+    public function __construct(int $minLength = 8, int $minCharStrength = 2)
+    {
+        $this->minLength = $minLength;
+        $this->minCharStrength = $minCharStrength;
+    }
+    /**
      * Validate the password based on different imposing conditions
      * Implement your own password validator if you want a more custom set of rules
      * This set of rules should work for a lot of general use cases
@@ -25,7 +44,7 @@ class PasswordValidator implements Validator
      */
     public function validate($password): Result
     {
-        $atleast = new ForAtLeast(2,
+        $atleast = new ForAtLeast($this->minCharStrength,
             new ContainsPattern(ContainsPattern::UPPERCASE),
             new ContainsPattern(ContainsPattern::LOWERCASE),
             new ContainsPattern(ContainsPattern::SPECIAL_CHARS),
@@ -34,7 +53,7 @@ class PasswordValidator implements Validator
 
         $rule = new ForAll(
             $atleast,
-            new MinimumLength(8));
+            new MinimumLength($this->minLength));
 
         $result = $rule->validate($password);
 
