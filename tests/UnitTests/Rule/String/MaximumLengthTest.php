@@ -60,7 +60,7 @@ class MaximumLengthTest extends TestCase
         $result = $this->getFailedResult();
         $error = $result->getFirstError();
 
-        $this->assertEquals(RuleErrorCode::TOO_LONG, $error->getCode());
+        $this->assertEquals(RuleErrorCode::LENGTH_ERROR, $error->getCode());
         $this->assertEquals('The supplied string is too long', $error->getMessage());
     }
 

@@ -22,7 +22,7 @@ class MinimumLength implements Rule
             return new Result\Success();
         }
         else return new Result\Failure(
-            new RuleError(RuleErrorCode::TOO_SHORT,
+            new RuleError(RuleErrorCode::LENGTH_ERROR,
             'The supplied string is too short'));
     }
 }

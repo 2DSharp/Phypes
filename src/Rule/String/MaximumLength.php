@@ -23,7 +23,7 @@ class MaximumLength implements Rule
             return new Success();
         }
         else return new Failure(
-            new RuleError(RuleErrorCode::TOO_LONG,
+            new RuleError(RuleErrorCode::LENGTH_ERROR,
                 'The supplied string is too long'));
     }
 }
