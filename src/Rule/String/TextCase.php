@@ -88,7 +88,7 @@ class TextCase implements Rule
 
     private function isSomeLower(string $text) : bool
     {
-        $containsLower = preg_match('/[a-z]/', $text);
+        $containsLower = (bool) preg_match('/[a-z]/', $text);
 
         if ($this->strictCheck)
            return !preg_match('/[\W]/', $text) && $containsLower;
@@ -98,7 +98,7 @@ class TextCase implements Rule
 
     private function isSomeUpper(string $text) : bool
     {
-        $containsUpper = preg_match('/[A-Z]/', $text);
+        $containsUpper = (bool) preg_match('/[A-Z]/', $text);
 
         if ($this->strictCheck)
             return !preg_match('/[\W]/', $text) && $containsUpper;

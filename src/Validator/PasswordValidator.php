@@ -11,7 +11,6 @@ use Phypes\Rule\Aggregate\ForAll;
 use Phypes\Rule\Aggregate\ForAtLeast;
 use Phypes\Rule\Pattern\ContainsPattern;
 use Phypes\Rule\String\MinimumLength;
-use Phypes\Rule\String\TextCase;
 
 class PasswordValidator implements Validator
 {
