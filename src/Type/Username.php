@@ -15,6 +15,7 @@ namespace Phypes\Type;
 use Phypes\Result\Failure;
 use Phypes\Validator\UsernameValidator;
 use Phypes\Validator\Validator;
+use function Phypes\getOptionalValue;
 
 class Username implements Type
 {
@@ -26,17 +27,15 @@ class Username implements Type
      */
     private $username;
 
-    private function getOption(int $key, $arr = [], $default) {
-        return isset($arr[$key]) ? $arr[$key]: $default;
-    }
+
     public function __construct(string $username, $options = [], Validator $validator = null)
     {
         if ($validator == null) {
             // use the default validator
             $validator = new UsernameValidator(
-                $this->getOption(self::OPT_MIN_LEN, $options, 4),
-                $this->getOption(self::OPT_MAX_LEN, $options, 12),
-                $this->getOption(self::OPT_ALLOWED_SPECIAL_CHARS, $options, ['-', '_']));
+                getOptionalValue(self::OPT_MIN_LEN, $options, 4),
+                getOptionalValue(self::OPT_MAX_LEN, $options, 12),
+                getOptionalValue(self::OPT_ALLOWED_SPECIAL_CHARS, $options, ['-', '_']));
         }
 
         $result = $validator->validate($username, $options);
