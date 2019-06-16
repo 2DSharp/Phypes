@@ -32,7 +32,7 @@ class ExactLength implements Rule
     }
     public function validate($data) : Result
     {
-        if (mb_strlen($data, 'UTF-8') >= $this->length) {
+        if (mb_strlen($data, 'UTF-8') == $this->length) {
             return new Success();
         }
         else return new Failure(
