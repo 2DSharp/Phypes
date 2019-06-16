@@ -12,6 +12,7 @@ namespace Phypes\Rule\String;
 
 use Phypes\Error\RuleError;
 use Phypes\Error\RuleErrorCode;
+use Phypes\Exception\InvalidRuleOption;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
@@ -36,17 +37,17 @@ class TextCase implements Rule
      * @var bool $strictCheck
      */
     private $strictCheck;
+
     /**
      * TextCase constructor.
-     * @throws \InvalidArgumentException
+     * @throws InvalidRuleOption
      * @param int $caseType
      * @param bool $allowSpecialChars
      */
     public function __construct(int $caseType, bool $allowSpecialChars = true)
     {
         if ($caseType > 4 || $caseType < 0)
-            throw new \InvalidArgumentException('Case Type ' . $caseType . ' is invalid. 
-            Check the class constants available to be used as caseTypes');
+            throw new InvalidRuleOption($caseType);
 
         $this->caseType = $caseType;
         $this->strictCheck = !$allowSpecialChars;
