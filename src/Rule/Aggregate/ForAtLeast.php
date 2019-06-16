@@ -19,38 +19,51 @@ use Phypes\Result\Result;
 use Phypes\Result\Success;
 use Phypes\Rule\Rule;
 
-class ForAll implements Rule
+/**
+ * Class ForAtLeast
+ * @package Phypes\Rule\Aggregate
+ * @author Dedipyaman Das <2d@twodee.me>
+ *
+ * Rule to aggregate different rules and validity depends on passing at least the number of specified rules out of all.
+ */
+class ForAtLeast implements Rule
 {
     /**
-     * @var array $rules
+     * @var int $minimum
+     */
+    private $minimum;
+    /**
+     * @var array|Rule[] $rules
      */
     private $rules = [];
-
     /**
-     * ForAll constructor.
+     * ForAtLeast constructor.
+     * @param int $numOfRules
      * @param Rule ...$rules
      * @throws InvalidAggregateRule
      */
-    public function __construct(Rule... $rules)
+    public function __construct(int $numOfRules, Rule... $rules)
     {
         if (empty($rules))
-            throw new InvalidAggregateRule("No rules specified for aggregate rule", ForAll::class);
+            throw new InvalidAggregateRule("No rules specified for aggregate rule", ForAtLeast::class);
+
+        if (count($rules) < $numOfRules)
+            throw new InvalidAggregateRule('Minimum passing rule number is greater than supplied rules',
+                ForAtLeast::class);
+
         $this->rules = $rules;
+        $this->minimum = $numOfRules;
     }
 
-    /**
-     * Validate for each rule. Works with an AND logic.
-     * @param $data
-     * @return Result
-     */
     public function validate($data): Result
     {
         /**
-         * @var Error $errors[]
+         * @var array|Error[] $errors
          */
         $errors = [];
-        foreach ($this->rules as $rule) {
+        $passed = 0;
 
+        foreach ($this->rules as $rule) {
             $result = $rule->validate($data);
 
             if (!$result->isValid()) {
@@ -62,14 +75,13 @@ class ForAll implements Rule
                     $errors[] = $error;
                 }
             }
+            else {
+                $passed++;
+            }
 
+            if ($passed >= $this->minimum)
+                return new Success();
         }
-
-        if (!($errors))
-            return new Success();
-        else {
-            return new Failure(...$errors); // Use the splat operator
-
-        }
+        return new Failure(...$errors);
     }
 }
