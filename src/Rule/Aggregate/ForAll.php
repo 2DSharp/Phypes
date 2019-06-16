@@ -13,6 +13,7 @@ namespace Phypes\Rule\Aggregate;
 
 
 use Phypes\Error\Error;
+use Phypes\Exception\InvalidAggregateRule;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
@@ -25,8 +26,15 @@ class ForAll implements Rule
      */
     private $rules = [];
 
+    /**
+     * ForAll constructor.
+     * @param Rule ...$rules
+     * @throws InvalidAggregateRule
+     */
     public function __construct(Rule... $rules)
     {
+        if (empty($rules))
+            throw new InvalidAggregateRule("No rules specified for aggregate rule", ForAll::class);
         $this->rules = $rules;
     }
 
@@ -55,7 +63,7 @@ class ForAll implements Rule
 
         }
 
-        if (empty($errors))
+        if (!($errors))
             return new Success();
         else {
             return new Failure(...$errors); // Use the splat operator
