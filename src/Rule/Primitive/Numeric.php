@@ -9,7 +9,7 @@
  */
 
 
-namespace Phypes\Rule\Chartype;
+namespace Phypes\Rule\Primitive;
 
 
 use Phypes\Error\RuleError;
@@ -19,11 +19,11 @@ use Phypes\Result\Result;
 use Phypes\Result\Success;
 use Phypes\Rule\Rule;
 
-class Numeric extends Chartype implements Rule
+class Numeric implements Rule
 {
     public function validate($data): Result
     {
-        if (is_numeric(str_replace($this->allowedSpecialChars, '', $data)))
+        if (is_numeric($data))
             return new Success();
         else
             return new Failure(new RuleError(RuleErrorCode::NOT_NUMERIC, 'Input value is not numeric'));
