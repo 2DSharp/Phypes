@@ -9,10 +9,10 @@
  */
 
 
-namespace Phypes\Rule\String;
+namespace Phypes\Rule\Chartype;
 
 
-abstract class StringTypes
+abstract class Chartype
 {
     /**
      * Special characters excused within the string pattern
