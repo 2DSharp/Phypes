@@ -10,4 +10,5 @@ abstract class RuleErrorCode
     const CASING_MISMATCH = 420004;
     const NOT_ALPHA = 420005;
     const PATTERN_MISMATCH = 420006;
+    const NOT_NUMERIC = 420007;
 }
