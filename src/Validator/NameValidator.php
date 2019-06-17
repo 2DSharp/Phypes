@@ -18,7 +18,7 @@ use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
 use Phypes\Rule\Aggregate\ForAll;
-use Phypes\Rule\String\Alpha;
+use Phypes\Rule\CharType\Alpha;
 use Phypes\Rule\String\MaximumLength;
 use Phypes\Rule\String\MinimumLength;
 

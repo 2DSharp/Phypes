@@ -13,7 +13,7 @@ namespace Phypes\Validator;
 
 use Phypes\Result\Result;
 use Phypes\Rule\Aggregate\ForAll;
-use Phypes\Rule\String\AlphaNumeric;
+use Phypes\Rule\Chartype\AlphaNumeric;
 use Phypes\Rule\String\MaximumLength;
 use Phypes\Rule\String\MinimumLength;
 
@@ -39,6 +39,11 @@ class UsernameValidator implements Validator
         $this->allowedSpecialChars = $allowedSpecialChars;
     }
 
+    /**
+     * @param $username
+     * @return Result
+     * @throws \Phypes\Exception\InvalidAggregateRule
+     */
     public function validate($username): Result
     {
         $rule = new ForAll(
