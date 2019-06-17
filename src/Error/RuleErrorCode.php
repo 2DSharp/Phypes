@@ -11,4 +11,6 @@ abstract class RuleErrorCode
     const NOT_ALPHA = 420005;
     const PATTERN_MISMATCH = 420006;
     const NOT_NUMERIC = 420007;
+    const NOT_INTEGER = 420008;
+    const NOT_FLOAT = 420009;
 }
