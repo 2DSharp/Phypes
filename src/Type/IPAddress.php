@@ -2,6 +2,8 @@
 
 namespace Phypes\Type;
 
+use Phypes\Exception\InvalidValue;
+use Phypes\Result\Failure;
 use Phypes\Validator\IPAddressValidator;
 use Phypes\Validator\Validator;
 
@@ -27,8 +29,10 @@ class IPAddress implements Type
 
         $result = $validator->validate($ip);
         if (!$result->isValid()) {
-            $error = $result->getFirstError();
-            throw new \InvalidArgumentException($error->getMessage(), $error->getCode());
+            /**
+             * @var Failure $result
+             */
+            throw new InvalidValue($result->getFirstError()->getMessage(), $result->getErrors());
         }
         $this->ip = $ip;
     }

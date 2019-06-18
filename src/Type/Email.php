@@ -2,6 +2,8 @@
 
 namespace Phypes\Type;
 
+use Phypes\Exception\InvalidValue;
+use Phypes\Result\Failure;
 use Phypes\Validator\EmailValidator;
 use Phypes\Validator\Validator;
 
@@ -16,7 +18,7 @@ class Email implements Type
      * Create an email object if data is valid.
      * @param string $email
      * @param Validator $validator
-     * @throws \InvalidArgumentException
+     * @throws InvalidValue
      */
     public function __construct(string $email, Validator $validator = null)
     {
@@ -27,8 +29,10 @@ class Email implements Type
         $result = $validator->validate($email);
 
         if (!$result->isValid()) {
-            $error = $result->getFirstError();
-            throw new \InvalidArgumentException($error->getMessage(), $error->getCode());
+            /**
+             * @var Failure $result
+             */
+            throw new InvalidValue($result->getFirstError()->getMessage(), $result->getErrors());
         }
         $this->email = $email;
     }

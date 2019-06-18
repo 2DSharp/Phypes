@@ -2,6 +2,7 @@
 
 namespace Phypes\Type;
 
+use Phypes\Exception\InvalidValue;
 use Phypes\Result\Failure;
 use Phypes\Validator\PasswordValidator;
 use Phypes\Validator\Validator;
@@ -39,8 +40,7 @@ class Password implements Type
             /**
              * @var Failure $result
              */
-            $error = $result->getFirstError();
-            throw new \InvalidArgumentException($error->getMessage(), $error->getCode());
+            throw new InvalidValue($result->getFirstError()->getMessage(), $result->getErrors());
         }
         $this->password = $password;
     }
