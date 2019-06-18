@@ -10,6 +10,6 @@
 
 namespace Phypes\Exception;
 
-final class InvalidAggregateRule extends InvalidValue
+final class InvalidAggregateRule extends InvalidRule
 {
 }
