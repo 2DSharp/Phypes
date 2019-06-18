@@ -9,7 +9,7 @@
  */
 
 
-namespace Phypes\Rule\Chartype;
+namespace Phypes\Rule\CharType;
 
 use Phypes\Error\RuleError;
 use Phypes\Error\RuleErrorCode;
@@ -19,7 +19,7 @@ use Phypes\Result\Success;
 use Phypes\Rule\Primitive\StringType;
 use Phypes\Rule\Rule;
 
-class AlphaNumeric extends Chartype implements Rule
+class AlphaNumeric extends CharType implements Rule
 {
     // TODO: Add AlphaNumeric test
 

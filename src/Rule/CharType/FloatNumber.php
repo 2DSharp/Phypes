@@ -17,11 +17,11 @@ use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
-use Phypes\Rule\Chartype\Chartype;
+use Phypes\Rule\CharType\CharType;
 use Phypes\Rule\Primitive\NumericType;
 use Phypes\Rule\Rule;
 
-class IntegerNumber extends Chartype implements Rule
+class FloatNumber extends CharType implements Rule
 {
     public function validate($value): Result
     {
@@ -30,9 +30,9 @@ class IntegerNumber extends Chartype implements Rule
         if (!$numericResult->isValid())
             return new $numericResult;
 
-        if (filter_var(str_replace($this->allowedSpecialChars, '', $value), FILTER_VALIDATE_INT) !== false) {
+        if (filter_var(str_replace($this->allowedSpecialChars, '', $value), FILTER_VALIDATE_FLOAT) !== false) {
             return new Success();
         }
-        return new Failure(new RuleError(RuleErrorCode::NOT_INTEGER, 'Value is not an integer'));
+        return new Failure(new RuleError(RuleErrorCode::NOT_FLOAT, 'Value is not float.'));
     }
 }

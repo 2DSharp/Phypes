@@ -13,7 +13,7 @@ namespace Phypes\Validator;
 
 use Phypes\Result\Result;
 use Phypes\Rule\Aggregate\ForAll;
-use Phypes\Rule\Chartype\AlphaNumeric;
+use Phypes\Rule\CharType\AlphaNumeric;
 use Phypes\Rule\String\MaximumLength;
 use Phypes\Rule\String\MinimumLength;
 

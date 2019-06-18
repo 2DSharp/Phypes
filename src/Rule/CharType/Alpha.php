@@ -9,7 +9,7 @@
  */
 
 
-namespace Phypes\Rule\Chartype;
+namespace Phypes\Rule\CharType;
 
 
 use Phypes\Error\RuleError;
@@ -20,7 +20,7 @@ use Phypes\Result\Success;
 use Phypes\Rule\Primitive\StringType;
 use Phypes\Rule\Rule;
 
-class Alpha extends Chartype implements Rule
+class Alpha extends CharType implements Rule
 {
     public function validate($data): Result
     {
