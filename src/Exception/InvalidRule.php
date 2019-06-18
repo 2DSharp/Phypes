@@ -14,8 +14,4 @@ namespace Phypes\Exception;
 
 class InvalidRule extends \Exception
 {
-    public function __construct(string $message, string $aggregateClass)
-    {
-        parent::__construct($aggregateClass . ":" . $message);
-    }
 }

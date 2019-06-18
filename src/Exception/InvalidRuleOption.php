@@ -13,4 +13,8 @@ namespace Phypes\Exception;
 
 final class InvalidRuleOption extends InvalidRule
 {
+    public function __construct(int $option, string $ruleClass)
+    {
+        parent::__construct($ruleClass . ': Rule option \"' . $option . '\" not defined');
+    }
 }

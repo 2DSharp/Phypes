@@ -12,4 +12,8 @@ namespace Phypes\Exception;
 
 final class InvalidAggregateRule extends InvalidRule
 {
+    public function __construct(string $message, string $aggregateClass)
+    {
+        parent::__construct($aggregateClass . ":" . $message);
+    }
 }
