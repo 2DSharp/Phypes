@@ -17,12 +17,18 @@ use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
+use Phypes\Rule\Primitive\StringType;
 use Phypes\Rule\Rule;
 
 class Alpha extends Chartype implements Rule
 {
     public function validate($data): Result
     {
+        $result = (new StringType())->validate($data);
+
+        if (!$result->isValid())
+            return new $result;
+
         if (ctype_alpha(str_replace($this->allowedSpecialChars, '', $data)))
             return new Success();
         else

@@ -9,30 +9,22 @@
  */
 
 
-namespace Phypes\Rule\Chartype;
+namespace Phypes\Rule\Primitive;
 
 use Phypes\Error\RuleError;
 use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
-use Phypes\Rule\Primitive\StringType;
 use Phypes\Rule\Rule;
 
-class AlphaNumeric extends Chartype implements Rule
+class StringType implements Rule
 {
-    // TODO: Add AlphaNumeric test
-
     public function validate($data): Result
     {
-        $result = (new StringType())->validate($data);
-
-        if (!$result->isValid())
-            return new $result;
-
-        if (ctype_alnum(str_replace($this->allowedSpecialChars, '', $data)))
+        if (is_string($data))
             return new Success();
         else
-            return new Failure(new RuleError(RuleErrorCode::NOT_ALNUM, 'String is not Alphanumeric.'));
+            return new Failure(new RuleError(RuleErrorCode::NOT_STRING, 'Input value is not a string'));
     }
 }

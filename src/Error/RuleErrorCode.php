@@ -17,4 +17,5 @@ abstract class RuleErrorCode
     const NOT_NEGATIVE = 420011;
     const EXCEEDS_MAXIMUM = 420012;
     const LESS_THAN_MINIMUM = 420013;
+    const NOT_STRING = 420014;
 }
