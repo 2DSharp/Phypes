@@ -42,7 +42,7 @@ class UsernameValidator implements Validator
     /**
      * @param $username
      * @return Result
-     * @throws \Phypes\Exception\InvalidAggregateRule
+     * @throws \Phypes\Exception\InvalidRule
      */
     public function validate($username): Result
     {

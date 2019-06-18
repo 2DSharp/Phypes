@@ -54,7 +54,7 @@ class NameValidator implements Validator
     /**
      * @param $name
      * @return Result
-     * @throws \Phypes\Exception\InvalidAggregateRule
+     * @throws \Phypes\Exception\InvalidRule
      */
     public function validate($name): Result
     {

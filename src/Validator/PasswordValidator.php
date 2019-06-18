@@ -39,8 +39,7 @@ class PasswordValidator implements Validator
      * This set of rules should work for a lot of general use cases
      * @param $password
      * @return Result
-     * @throws \Phypes\Exception\InvalidRuleOption
-     * @throws \Phypes\Exception\InvalidAggregateRule
+     * @throws \Phypes\Exception\InvalidRule
      */
     public function validate($password): Result
     {
