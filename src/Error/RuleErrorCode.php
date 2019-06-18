@@ -13,4 +13,8 @@ abstract class RuleErrorCode
     const NOT_NUMERIC = 420007;
     const NOT_INTEGER = 420008;
     const NOT_FLOAT = 420009;
+    const NOT_POSITIVE = 420010;
+    const NOT_NEGATIVE = 420011;
+    const EXCEEDS_MAXIMUM = 420012;
+    const LESS_THAN_MINIMUM = 420013;
 }
