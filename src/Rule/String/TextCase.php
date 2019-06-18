@@ -16,6 +16,7 @@ use Phypes\Exception\InvalidRuleOption;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
+use Phypes\Rule\Primitive\StringType;
 use Phypes\Rule\Rule;
 
 class TextCase implements Rule
@@ -47,7 +48,7 @@ class TextCase implements Rule
     public function __construct(int $caseType, bool $allowSpecialChars = true)
     {
         if ($caseType > 4 || $caseType < 0)
-            throw new InvalidRuleOption($caseType);
+            throw new InvalidRuleOption($caseType, TextCase::class);
 
         $this->caseType = $caseType;
         $this->strictCheck = !$allowSpecialChars;
@@ -108,6 +109,11 @@ class TextCase implements Rule
 
     public function validate($data): Result
     {
+        $result = (new StringType())->validate($data);
+
+        if (!$result->isValid())
+            return new $result;
+
         $isValid = false;
 
         switch ($this->caseType) {

@@ -17,6 +17,7 @@ use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
+use Phypes\Rule\Primitive\StringType;
 use Phypes\Rule\Rule;
 
 class ExactLength implements Rule
@@ -32,6 +33,11 @@ class ExactLength implements Rule
     }
     public function validate($data) : Result
     {
+        $result = (new StringType())->validate($data);
+
+        if (!$result->isValid())
+            return new $result;
+
         if (mb_strlen($data, 'UTF-8') == $this->length) {
             return new Success();
         }

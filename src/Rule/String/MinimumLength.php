@@ -18,6 +18,11 @@ class MinimumLength implements Rule
 
     public function validate($data) : Result\Result
     {
+        $result = (new StringType())->validate($data);
+
+        if (!$result->isValid())
+            return new $result;
+
         if (mb_strlen($data, 'UTF-8') >= $this->minLength) {
             return new Result\Success();
         }
