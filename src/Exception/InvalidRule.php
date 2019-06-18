@@ -8,8 +8,14 @@
  * file that was distributed with this source code.
  */
 
+
 namespace Phypes\Exception;
 
-final class InvalidAggregateRule extends InvalidValue
+
+class InvalidRule extends \Exception
 {
+    public function __construct(string $message, string $aggregateClass)
+    {
+        parent::__construct($aggregateClass . ":" . $message);
+    }
 }

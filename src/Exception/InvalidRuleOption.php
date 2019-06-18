@@ -11,13 +11,6 @@
 
 namespace Phypes\Exception;
 
-
-use Throwable;
-
-class InvalidRuleOption extends \Exception
+final class InvalidRuleOption extends InvalidRule
 {
-    public function __construct(int $option, int $code = 0, Throwable $previous = null)
-    {
-        parent::__construct('Rule option \"' . $option . '\" not defined', $code, $previous);
-    }
 }
