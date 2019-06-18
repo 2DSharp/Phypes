@@ -10,14 +10,15 @@ Be nice, be respectful.
  - Commits should do exactly what their message says. If a commit affects quite a few files, and does a few related things, mention them in the commit description. Refrain from using `git commit -m` in such cases.
  -  IDE configuration files/temp files are not meant to be a part of the repository and they should remain so.
  -  Variable names like `a`, `x`, `foo` are unacceptable, use variable names that describes its purpose.
- -  Format the code correctly before submitting a patch. IntelliJ's auto format option should do it well enough. 
+ -  Format the code correctly before submitting a patch. IntelliJ/PHPStorm's auto format option should do it well enough. 
  
  ## Formatting guidelines
  
  - Casing:
     - **camelCase** for method/variable names.
     - **PascalCase** for class name/enum/interface names.
- - Class and method declarations have braces starting in the next line. For everything else, braces start at next line.
+ - Class and method declarations have braces starting in the next line. For everything else, braces start at the end
+  of the same line.
  - One space between operators and operands is a must.
  - Make sure a line doesn't exceed 80 characters. 
  
