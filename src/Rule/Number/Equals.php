@@ -17,7 +17,7 @@ use Phypes\Error\RuleErrorCode;
 use Phypes\Result\Failure;
 use Phypes\Result\Result;
 use Phypes\Result\Success;
-use Phypes\Rule\Primitive\Numeric;
+use Phypes\Rule\Primitive\NumericType;
 use Phypes\Rule\Rule;
 
 class Equals implements Rule
@@ -34,7 +34,7 @@ class Equals implements Rule
 
     public function validate($value): Result
     {
-        $numericResult = (new Numeric())->validate($value);
+        $numericResult = (new NumericType())->validate($value);
 
         if (!$numericResult->isValid())
             return new $numericResult;

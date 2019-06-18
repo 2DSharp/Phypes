@@ -19,7 +19,7 @@ use Phypes\Result\Result;
 use Phypes\Result\Success;
 use Phypes\Rule\Rule;
 
-class Numeric implements Rule
+class NumericType implements Rule
 {
     public function validate($data): Result
     {
