@@ -25,12 +25,9 @@
     },
     "require": {
         "php": ">=7.2",
-        "ext-pdo": "*",
-        "psr/log": "1.*",
         "ext-mbstring": "*"
     },
     "require-dev": {
-        "ext-pdo_sqlite": "*",
         "phpunit/phpunit": "^7",
         "mockery/mockery": "^1.1"
     },
