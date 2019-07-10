@@ -12,6 +12,7 @@
 namespace Phypes\Type;
 
 
+use Phypes\Exception\InvalidValue;
 use Phypes\Result\Failure;
 use Phypes\Validator\UsernameValidator;
 use Phypes\Validator\Validator;
@@ -27,7 +28,14 @@ class Username implements Type
      */
     private $username;
 
-
+    /**
+     * Username constructor.
+     * @param string $username
+     * @param array $options
+     * @param Validator|null $validator
+     * @throws InvalidValue
+     * @throws \Phypes\Exception\InvalidRule
+     */
     public function __construct(string $username, $options = [], Validator $validator = null)
     {
         if ($validator == null) {
@@ -45,7 +53,7 @@ class Username implements Type
              * @var Failure $result
              */
             $error = $result->getFirstError();
-            throw new \InvalidArgumentException($error->getMessage(), $error->getCode());
+            throw new InvalidValue($error->getMessage(), $error->getCode());
         }
         $this->username = $username;
     }
