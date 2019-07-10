@@ -22,8 +22,8 @@ class Password implements Type
      * @param string $password
      * @param array $options
      * @param Validator $validator
-     * @throws \Phypes\Exception\InvalidAggregateRule
-     * @throws \Phypes\Exception\InvalidRuleOption
+     * @throws InvalidValue
+     * @throws \Phypes\Exception\InvalidRule
      */
     public function __construct(string $password, $options =[], Validator $validator = null)
     {
