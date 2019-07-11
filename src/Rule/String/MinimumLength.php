@@ -5,6 +5,7 @@ namespace Phypes\Rule\String;
 use Phypes\Error\RuleError;
 use Phypes\Error\RuleErrorCode;
 use Phypes\Result;
+use Phypes\Rule\Primitive\StringType;
 use Phypes\Rule\Rule;
 
 class MinimumLength implements Rule
