@@ -13,31 +13,33 @@ namespace Phypes\Type;
 
 use Phypes\Exception\EmptyRequiredValue;
 
-class Required implements Type
+class StringRequired implements Type
 {
     /**
-     * @var Type $type
+     * @var string $value
      */
-    private $type;
+    private $value;
+
     /**
      * Required constructor.
-     * @param Type $type
+     * @param string $text
      * @throws EmptyRequiredValue
      */
-    public function __construct(Type $type)
+    public function __construct(string $text)
     {
-        if (empty($type->getValue()))
-            throw new EmptyRequiredValue('The required type '. get_class($type) . ' cannot have an empty value');
+        if (empty($text))
+            throw new EmptyRequiredValue();
 
-        $this->type = $type;
+        $this->value = $text;
     }
 
     public function __toString(): string
     {
+        return $this->value;
     }
 
     public function getValue()
     {
-        return $this->type->getValue();
+        return $this->value;
     }
 }
