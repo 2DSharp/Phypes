@@ -15,7 +15,10 @@
     ],
 
     "autoload": {
-      "psr-4": { "Phypes\\": "src/" }
+        "psr-4": { "Phypes\\": "src/" },
+        "files": [
+            "src/helpers.php"
+        ]
     },
 
     "autoload-dev": {
