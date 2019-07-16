@@ -52,8 +52,7 @@ class Username implements Type
             /**
              * @var Failure $result
              */
-            $error = $result->getFirstError();
-            throw new InvalidValue($error->getMessage(), $error->getCode());
+            throw new InvalidValue($result->getFirstError()->getMessage(), $result->getErrors());
         }
         $this->username = $username;
     }

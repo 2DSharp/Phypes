@@ -9,4 +9,5 @@ abstract class TypeErrorCode
     const PASSWORD_INVALID = 32002;
     const IP_INVALID = 32003;
     const NAME_INVALID = 32004;
+    const USERNAME_INVALID = 32005;
 }
