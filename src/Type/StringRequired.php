@@ -25,7 +25,7 @@ class StringRequired implements Type
      * @param string $text
      * @throws EmptyRequiredValue
      */
-    public function __construct(string $text)
+    public function __construct(?string $text)
     {
         if (empty($text))
             throw new EmptyRequiredValue();
