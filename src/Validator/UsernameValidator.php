@@ -11,7 +11,11 @@
 
 namespace Phypes\Validator;
 
+use Phypes\Error\TypeError;
+use Phypes\Error\TypeErrorCode;
+use Phypes\Result\Failure;
 use Phypes\Result\Result;
+use Phypes\Result\Success;
 use Phypes\Rule\Aggregate\ForAll;
 use Phypes\Rule\CharType\AlphaNumeric;
 use Phypes\Rule\String\MaximumLength;
@@ -51,7 +55,15 @@ class UsernameValidator implements Validator
             new MinimumLength($this->minLength),
             new MaximumLength($this->maxLength));
 
-        return $rule->validate($username);
+        $result = $rule->validate($username);
+        if ($result->isValid())
+            return new Success();
+        /**
+         * @var Failure $result
+         */
+        return new Failure(new TypeError(TypeErrorCode::USERNAME_INVALID, 'Invalid Username format'),
+            ...$result->getErrors());
+
 
     }
 }
